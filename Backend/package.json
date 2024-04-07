@@ -2,7 +2,7 @@
   "name": "dsw",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/App.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "4.19.1",
     "jsonwebtoken": "^9.0.2",
     "tsc-watch": "^6.2.0"
