@@ -1,17 +1,14 @@
 import { Router } from "express";
-/*import blogGetAllController from "../controllers/blog-GetAll.controller.js";
-import blogPublishController from "../controllers/blog-publish.controller.js";
-import blogProfileController from "../controllers/blog-profile.controller.js";
-import blogUpdateController from "../controllers/blog-update.controller.js";
-import blogDeleteController from "../controllers/blog-delete.controller.js";
-import blogGetOneController from "../controllers/blog-GetOne.controller.js";
-import userJWTDTO from "../dto/user-jwt.dto.js"*/
+import userGetAllController from "../controllers/user-GetAll.Controllers.js";
+import userGetOneController from "../controllers/user-GetOne.Controllers.js";
 //Imports de validaciones
 const userRouter = Router();
 //Metodos con sus verbos
+userRouter.get('/getAll', userGetAllController);
+userRouter.get('/getOne/:id', userGetOneController);
 /*
 
-userRouter.get('/getAll', userGetAllController)
+
 userRouter.post('/register', userRegisterController);
 userRouter.get('/getOne', userGetOneController);
 userRouter.patch('/update', userUpdateController);

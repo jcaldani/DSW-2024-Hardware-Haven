@@ -1,0 +1,1 @@
+{"version":3,"file":"userEntity.js","sourceRoot":"","sources":["../../src/Model/userEntity.ts"],"names":[],"mappings":"AAAA,OAAO,MAAM,MAAM,aAAa,CAAA;AAEhC,MAAM,OAAO,IAAI;IAKb,YAAY,IAAY,EAAE,QAAgB;QACtC,IAAI,CAAC,EAAE,GAAG,MAAM,CAAC,UAAU,EAAE,CAAC;QAC9B,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;IAC7B,CAAC;CACJ"}
