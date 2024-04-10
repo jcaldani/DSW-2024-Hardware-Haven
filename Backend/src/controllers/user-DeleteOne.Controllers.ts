@@ -4,19 +4,17 @@ import { User } from '../Model/userEntity.js';
 
 const userRepo = new UserRepository();
 
-const userRegisterController = async (req: Request, res: Response): Promise<void> => {       
-    const {nameUser, password} = req.body; 
+const userDeleteOneController = async (req: Request, res: Response): Promise<void> => {       
+    const {id} = req.params;
 
     try{
-        const user = await userRepo.findName({name: nameUser});
-
-        if (user === undefined) {
-            const new_user = new User(nameUser, password);
-            userRepo.add(new_user);
-            res.status(200).json({
-                data: new_user,
-                message: "The user was added"
-            });
+        const user = await userRepo.findOne({id: id});
+        if (user) {
+                const user_deleted = await userRepo.delete({id:id});
+                res.status(200).json({
+                    data: user_deleted,
+                    message: "The user was deleted"
+                });
         } else {
             res.status(404).json({
                 data: undefined,
@@ -34,7 +32,4 @@ const userRegisterController = async (req: Request, res: Response): Promise<void
     }     
 };
 
-export default userRegisterController;
-
-
-      
+export default userDeleteOneController;
