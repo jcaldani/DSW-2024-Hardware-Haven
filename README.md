@@ -17,4 +17,18 @@ Plataforma en línea con una amplia gama de componentes de hardware para armar t
 [Modelo](https://drive.google.com/file/d/1lfZbuE-fTsi7OdIdjwb3Q5HKmJMzFImU/view?usp=sharing) 
 
 
+### Alcance Funcional
+|Req|Detalle|
+|:-|:-|
+|CRUD |1. CRUD Usuario<br>2. CRUD Compra<br>3. CRUD LineaCompra<br>4. CRUD Componente<br>5. CRUD Precio<br>6. CRUD Categoria|
+|Listado |1. Listado de componentes filtrado por nombre, precio, categoria. (Con su detalle)|
+|CUU/Epic|1. Comprar un componente para el armado de la PC <br>2. Facturacion|
 
+
+### Alcance Adicional Voluntario
+
+|Req|Detalle|
+|:-|:-|
+|Listados |1. Listado de compras filtrado por fecha, cliente <br>2. Listado de compras por cliente<br>3. Listado de totales|
+|CUU/Epic|1. Descuentos<br>2. Cancelación de la compra|
+|Otros|1. Envío de ofertas o nuevos productos por email al cliente|
