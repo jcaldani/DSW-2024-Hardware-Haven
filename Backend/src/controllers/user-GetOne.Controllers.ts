@@ -4,7 +4,7 @@ import { UserRepository } from "../repository/userRepository.js";
 const userRepo = new UserRepository();
 
 const userGetOneController = async (req: Request, res: Response): Promise<void> => {       
-    const {id} = req.params;
+    const id =  parseInt(req.params.id);
 
     try{
         const user = await userRepo.findOne({id: id});

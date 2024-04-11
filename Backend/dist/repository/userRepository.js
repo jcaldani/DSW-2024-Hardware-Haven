@@ -1,29 +1,95 @@
-import { User } from "../Model/userEntity.js";
-const users = [new User('Nacho', '555')];
+import { User } from "../Model/user.entity.js";
+import { orm } from '../shared/db/orm.js';
+const em = orm.em;
 export class UserRepository {
-    findAll() {
-        return users;
-    }
-    findOne(item) {
-        return users.find(user => user.id === item.id);
-    }
-    add(item) {
-        users.push(item);
-        return item;
-    }
-    update(item) {
-        const user_id = users.findIndex((u) => u.id === item.id);
-        if (user_id !== -1) {
-            users[user_id] = { ...users[user_id], ...item };
+    async findAll() {
+        try {
+            const users = await em.find(User, {}
+            //,{ populate: ['compras'] }
+            );
+            return users;
         }
-        return users[user_id];
+        catch (error) {
+            return undefined;
+        }
     }
-    delete(item) {
-        const user_id = users.findIndex((u) => u.id === item.id);
-        if (user_id !== -1) {
-            const deletedUsers = users[user_id];
-            users.splice(user_id, 1);
-            return deletedUsers;
+    async findOne(item) {
+        try {
+            const user = await em.findOneOrFail(User, { id: item.id }
+            //,{ populate: ['compras'] }
+            );
+            return user;
+        }
+        catch (error) {
+            return undefined;
+        }
+    }
+    async add(item) {
+        try {
+            const new_user = em.create(User, item);
+            await em.flush();
+            return new_user;
+        }
+        catch (error) {
+            return undefined;
+        }
+    }
+    async update(item) {
+        try {
+            const id = item.id;
+            const userToUpdate = await em.findOneOrFail(User, { id });
+            em.assign(userToUpdate, item);
+            await em.flush();
+            return userToUpdate;
+        }
+        catch (error) {
+            return;
+        }
+    }
+    async delete(item) {
+        try {
+            const id = item.id;
+            const user = em.getReference(User, id);
+            await em.removeAndFlush(user);
+            return user;
+        }
+        catch (error) {
+            return undefined;
+        }
+    }
+    async findName(item) {
+        try {
+            const user = await em.findOneOrFail(User, { name: item.name }
+            //,{ populate: ['compras'] }
+            );
+            return user;
+        }
+        catch (error) {
+            return undefined;
+        }
+    }
+    async updatePassword(item, newPassword) {
+        try {
+            const id = item.id;
+            const userToUpdate = await em.findOneOrFail(User, { id });
+            userToUpdate.password = newPassword;
+            await em.persistAndFlush(userToUpdate);
+            return userToUpdate;
+        }
+        catch (error) {
+            return undefined;
+        }
+    }
+    async updateUserName(item, newUserName) {
+        try {
+            const id = item.id;
+            const userToUpdate = await em.findOneOrFail(User, { id });
+            userToUpdate.name = newUserName;
+            await em.persistAndFlush(userToUpdate);
+            return userToUpdate;
+        }
+        catch (error) {
+            return undefined;
         }
     }
 }

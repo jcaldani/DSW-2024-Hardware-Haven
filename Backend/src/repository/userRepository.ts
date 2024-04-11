@@ -1,54 +1,114 @@
-import { User } from "../Model/userEntity.js";
-import { Repositoy } from "../shared/repository.js";
+import { Request, Response, NextFunction } from 'express'
+import { User } from "../Model/user.entity.js";
+import { orm } from '../shared/db/orm.js'
 
- const users: User[] = [new User('Nacho', '555')]; 
+const em = orm.em;
 
-export class UserRepository implements Repositoy<User> {
+export class UserRepository  {
 
-    
-    public findAll(): User[] {
-        return users; 
-    }
-
-    public findOne(item: { id: string }): User | undefined {
-        return users.find(user => user.id === item.id); 
-    }
-
-    public add(item: User): User {
-        users.push(item); 
-        return item; 
-    }
-
-    public update(item: User): User | undefined {
-    const user_id = users.findIndex((u)=> u.id === item.id)    
-        if(user_id !== -1){  users[user_id] = { ...users[user_id], ...item} }
-        return users[user_id]
-    }
-
-    public delete(item: { id: string; }): User | undefined {
-    const user_id = users.findIndex((u)=> u.id === item.id)   
-    if(user_id !== -1){  
-        const deletedUsers = users[user_id]
-        users.splice(user_id, 1)
-        return deletedUsers
-    }
+    async findAll(): Promise<User[] | undefined> { 
+        try {
+            const users = await em.find(
+                User,
+                {}
+                //,{ populate: ['compras'] }
+            );
+            return users;
+        } catch (error: any) {
+            return undefined;
+        }
     }
     
-    public findName(item: { name: string }): User | undefined {
-        return users.find(user => user.name === item.name); 
+
+    async findOne(item: { id: number }): Promise<User | undefined> {
+        try {
+            
+            const user = await em.findOneOrFail(
+                User,
+                { id: item.id }
+                //,{ populate: ['compras'] }
+            );
+            return user;
+        } catch (error: any) {
+            return undefined;
+        }
     }
 
-    public updatePassword(item: User, newPassword:string): User | undefined {
-        const user_id = users.findIndex((u)=> u.id === item.id)    
-            if(user_id !== -1){  users[user_id].password = newPassword}
-            return users[user_id]
+    
+
+    async add(item: User): Promise<User | undefined> {
+        try {
+            const new_user = em.create(User, item)
+            await em.flush()
+            return new_user;
+          } catch (error: any) {
+           return undefined;
+          }
+    }
+
+    async update(item: User): Promise<User | undefined>{
+        try {            
+            const id = item.id;
+            const userToUpdate = await em.findOneOrFail(User, { id })
+            em.assign(userToUpdate, item)
+            await em.flush()
+            return userToUpdate;
+            
+          } catch (error: any) {
+            return
+          }
+    }
+
+    async delete(item: { id: number; }): Promise<User | undefined> {
+        try {
+            const id = item.id;
+            const  user = em.getReference(User, id)
+            await em.removeAndFlush(user);
+            return user;
+          } catch (error: any) {
+            return undefined;
+          }
+
+
+    }
+    
+    async findName(item: { name: string }): Promise<User | undefined> {
+        try {
+            
+            const user = await em.findOneOrFail(
+                User,
+                { name: item.name }
+                //,{ populate: ['compras'] }
+            );
+            return user;
+        } catch (error: any) {
+            return undefined;
+        }
+    }
+
+    async updatePassword(item: User, newPassword:string): Promise<User | undefined> {
+        try {
+            const id = item.id;
+            const userToUpdate = await em.findOneOrFail(User, { id });
+            userToUpdate.password = newPassword;
+            await em.persistAndFlush(userToUpdate);
+            return userToUpdate;
+        } catch (error: any) {
+            return undefined;
+        }
         }
 
-    public updateUserName(item: User, newUserName:string): User | undefined {
-       const user_id = users.findIndex((u)=> u.id === item.id)    
-            if(user_id !== -1){  users[user_id].name = newUserName}
-            return users[user_id]
+    async updateUserName(item: User, newUserName:string): Promise<User | undefined>{
+        try {
+            const id = item.id;
+            const userToUpdate = await em.findOneOrFail(User, { id });
+            userToUpdate.name = newUserName;
+            await em.persistAndFlush(userToUpdate);
+            return userToUpdate;
+        } catch (error: any) {
+            return undefined;
         }
 
 
+}
 }

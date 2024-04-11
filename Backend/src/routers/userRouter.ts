@@ -9,17 +9,19 @@ import userUpdateUserNameController from "../controllers/user-UpdateUserName.Con
 import userDeleteOneController from "../controllers/user-DeleteOne.Controllers.js";
 import userUpdateController from "../controllers/user-Update.Controllers.js";
 //Imports de validaciones
-
+import {sanitizeUserInput} from "../dto/user-sanitize.dto.js"
 const userRouter = Router();
-//Metodos con sus verbos
 
+
+
+//middlewares
 userRouter.get('/getAll', userGetAllController)
 userRouter.get('/getOne/:id', userGetOneController)
-userRouter.post('/register', userRegisterController);
-userRouter.patch('/updatePassword', userUpdatePasswordController);
-userRouter.patch('/updateUserName', userUpdateUserNameController);
-userRouter.delete('/deleteOne',userDeleteOneController);
-userRouter.put('/Update',userUpdateController)
+userRouter.post('/register',sanitizeUserInput,  userRegisterController);
+userRouter.patch('/updatePassword/:id',sanitizeUserInput, userUpdatePasswordController);
+userRouter.patch('/updateUserName/:id',sanitizeUserInput, userUpdateUserNameController);
+userRouter.delete('/deleteOne/:id',userDeleteOneController);
+userRouter.put('/Update/:id',sanitizeUserInput, userUpdateController)
 
 
 export default userRouter;
