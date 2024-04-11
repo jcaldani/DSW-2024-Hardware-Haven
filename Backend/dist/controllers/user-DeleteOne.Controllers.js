@@ -1,19 +1,20 @@
 import { UserRepository } from "../repository/userRepository.js";
 const userRepo = new UserRepository();
-const userGetOneController = async (req, res) => {
+const userDeleteOneController = async (req, res) => {
     const id = parseInt(req.params.id);
     try {
         const user = await userRepo.findOne({ id: id });
         if (user) {
+            const user_deleted = await userRepo.delete({ id: id });
             res.status(200).json({
-                data: user,
-                message: "The user"
+                data: user_deleted,
+                message: "The user was deleted"
             });
         }
         else {
             res.status(404).json({
                 data: undefined,
-                message: 'User not found'
+                message: 'User incorrect credentials'
             });
         }
     }
@@ -25,5 +26,5 @@ const userGetOneController = async (req, res) => {
         });
     }
 };
-export default userGetOneController;
-//# sourceMappingURL=user-GetOne.Controllers.js.map
+export default userDeleteOneController;
+//# sourceMappingURL=user-DeleteOne.Controllers.js.map

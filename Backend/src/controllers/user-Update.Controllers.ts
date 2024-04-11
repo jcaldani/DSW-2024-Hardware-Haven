@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { UserRepository } from "../repository/userRepository.js";
-import { User } from '../Model/userEntity.js';
+import { User } from '../Model/user.entity.js';
 
 const userRepo = new UserRepository();
 
 const userUpdateController = async (req: Request, res: Response): Promise<void> => {       
     const {newPassword, oldPassword, newUserName} = req.body; 
-    const {id} = req.params;
+    const id =  parseInt(req.params.id);
 
     try{
         const user = await userRepo.findOne({id: id});
