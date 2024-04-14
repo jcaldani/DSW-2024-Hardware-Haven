@@ -1,6 +1,6 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+/// <reference types="@angular/localize" />
 
-bootstrapApplication(AppComponent, appConfig)
+import { bootstrapApplication } from '@angular/platform-browser';
+import { HomeComponent } from './app/home/home.component.js';
+bootstrapApplication(HomeComponent)
   .catch((err) => console.error(err));
