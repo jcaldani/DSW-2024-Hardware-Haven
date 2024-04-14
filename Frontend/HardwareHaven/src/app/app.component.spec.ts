@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'HarwareHaven' title`, () => {
+  it(`should have the 'HardwareHaven' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('HarwareHaven');
+    expect(app.title).toEqual('HardwareHaven');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, HarwareHaven');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, HardwareHaven');
   });
 });
