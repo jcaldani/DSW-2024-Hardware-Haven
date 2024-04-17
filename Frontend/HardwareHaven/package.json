@@ -1,5 +1,5 @@
 {
-  "name": "harware-haven",
+  "name": "hardware-haven",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -20,9 +20,13 @@
     "@angular/router": "^17.3.0",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
+<<<<<<< HEAD:Frontend/HarwareHaven/package.json
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
     "popper.js": "^1.16.1",
+=======
+    "bootstrap": "^5.3.2",
+>>>>>>> Goingon20240411:Frontend/HardwareHaven/package.json
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
