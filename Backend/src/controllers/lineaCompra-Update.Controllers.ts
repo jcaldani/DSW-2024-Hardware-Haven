@@ -7,7 +7,7 @@ const lineaCompraRepo = new LineaCompraRepository();
 
 //const componenteRepo = new ComponenteRepository();
 
-const compraUpdateController = async (req: Request, res: Response): Promise<void> => {       
+const lineaCompraUpdateController = async (req: Request, res: Response): Promise<void> => {       
     const {nroLinea, compraId, cantidad, subTotal
         //,componenteId
     } = req.body; 
@@ -52,4 +52,4 @@ const compraUpdateController = async (req: Request, res: Response): Promise<void
     }     
 };
 
-export default compraUpdateController;
+export default lineaCompraUpdateController;

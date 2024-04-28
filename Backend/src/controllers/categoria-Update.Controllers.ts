@@ -7,7 +7,8 @@ const categoriaRepo = new CategoriaRepository();
 //const componenteRepo = new ComponenteRepository();
 
 const categoriaUpdateController = async (req: Request, res: Response): Promise<void> => {       
-    const {categoriaId, descripcion, componenteId} = req.body; 
+    const {descripcion, componenteId} = req.body; 
+    const categoriaId =  parseInt(req.params.id);
 
     try{
 

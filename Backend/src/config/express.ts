@@ -1,16 +1,12 @@
 import express  from "express";
 import userRouter from "../routers/userRouter.js";
-
-/*import compraRouter from "../routers/compraRouter.js";
-import lineaCompraRouter from "../routers/lineaCompraRouter.js";
-import precioRouter from "../routers/precioRouter.js";
-import categoriaRouter from "../routers/categoriaRouter.js";
-import userRouter from "../routers/userRouter.js";
-*/
-
-import 'reflect-metadata'
+import 'reflect-metadata';
 import { orm, syncSchema } from '../shared/db/orm.js'
 import { RequestContext } from '@mikro-orm/core'
+import categoriaRouter from "../routers/categoriaRouter.js";
+import precioRouter from "../routers/precioRouter.js";
+import lineaCompraRouter from "../routers/lineCompraRouter.js";
+import compraRouter from "../routers/compraRouter.js";
 
 //import cors from 'cors';
 
@@ -28,16 +24,11 @@ HarwareHavenexpressApp.use((req, res, next) => {
 
 //Routers del Negocio-------------------------------
 HarwareHavenexpressApp.use('/api/user', userRouter);
-
-//Add Here, if you need to add more routers for each custom class.
-
-
-/*
 HarwareHavenexpressApp.use('/api/compra', compraRouter);
 HarwareHavenexpressApp.use('/api/lineaCompra', lineaCompraRouter);
 HarwareHavenexpressApp.use('/api/precio', precioRouter);
 HarwareHavenexpressApp.use('/api/categoria', categoriaRouter);
-*/
+
 
 
 
