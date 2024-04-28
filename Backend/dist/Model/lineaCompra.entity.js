@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Entity, Property, ManyToOne, PrimaryKey } from '@mikro-orm/core';
+import { Entity, Property, ManyToOne, PrimaryKey, } from '@mikro-orm/core';
 import { Componente } from './componente.entity.js';
 import { Compra } from './compra.entity.js';
 export let LineaCompra = class LineaCompra {
@@ -34,7 +34,7 @@ __decorate([
 ], LineaCompra.prototype, "subTotal", void 0);
 __decorate([
     ManyToOne(() => Compra, { primary: true, nullable: false }),
-    __metadata("design:type", Compra)
+    __metadata("design:type", Object)
 ], LineaCompra.prototype, "compra", void 0);
 __decorate([
     ManyToOne(() => Componente, { nullable: false }),
@@ -42,6 +42,6 @@ __decorate([
 ], LineaCompra.prototype, "componente", void 0);
 LineaCompra = __decorate([
     Entity(),
-    __metadata("design:paramtypes", [Number, Compra, Componente])
+    __metadata("design:paramtypes", [Number, Object, Componente])
 ], LineaCompra);
 //# sourceMappingURL=lineaCompra.entity.js.map

@@ -19,7 +19,7 @@ export let User = class User extends BaseEntity {
     }
 };
 __decorate([
-    Property({ nullable: false }),
+    Property({ nullable: false, unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 __decorate([

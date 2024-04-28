@@ -10,7 +10,7 @@ import {
 @Entity()
 export class User extends BaseEntity {
 
-    @Property({nullable:false})
+    @Property({nullable:false, unique: true})
     name!: string;
 
     @Property({nullable:false})

@@ -22,4 +22,4 @@ __decorate([
 Componente = __decorate([
     Entity()
 ], Componente);
-//# sourceMappingURL=Componente.entity.js.map
+//# sourceMappingURL=componente.entity.js.map

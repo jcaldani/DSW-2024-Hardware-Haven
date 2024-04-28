@@ -2,8 +2,8 @@ import {
     Entity,
     Property,
     ManyToOne, 
-    PrimaryKey
-    
+    PrimaryKey,
+    Rel,
   } from '@mikro-orm/core'
   
 
@@ -25,12 +25,12 @@ export class LineaCompra{
     subTotal!: number;
 
     @ManyToOne(() => Compra,{primary:true, nullable:false})
-    compra!: Compra;
+    compra!: Rel<Compra>;
 
     @ManyToOne(() => Componente ,{nullable:false})
     componente!: Componente;
 
-    constructor(cantidad:number, compra:Compra, componente:Componente)
+    constructor(cantidad:number, compra:Rel<Compra>, componente:Componente)
      {
       this.cantidad = cantidad;
       this.compra = compra;

@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Entity, OneToMany, Property, Cascade, Collection, ManyToOne, } from '@mikro-orm/core';
+import { Entity, OneToMany, Property, Cascade, Collection, ManyToOne } from '@mikro-orm/core';
 import { BaseEntity } from '../shared/db/baseEntity.entity.js';
 import { User } from './user.entity.js';
 import { LineaCompra } from './lineaCompra.entity.js';
@@ -33,14 +33,14 @@ __decorate([
 ], Compra.prototype, "total", void 0);
 __decorate([
     ManyToOne(() => User, { nullable: false }),
-    __metadata("design:type", User)
+    __metadata("design:type", Object)
 ], Compra.prototype, "user", void 0);
 __decorate([
-    OneToMany(() => LineaCompra, lc => lc.compra, { cascade: [Cascade.ALL] }),
+    OneToMany(() => LineaCompra, (lineaCompra) => lineaCompra.compra, { cascade: [Cascade.ALL], nullable: true }),
     __metadata("design:type", Object)
 ], Compra.prototype, "lineasCompras", void 0);
 Compra = __decorate([
     Entity(),
-    __metadata("design:paramtypes", [User])
+    __metadata("design:paramtypes", [Object])
 ], Compra);
 //# sourceMappingURL=compra.entity.js.map

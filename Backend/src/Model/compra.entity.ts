@@ -5,6 +5,7 @@ import {
     Cascade,
     Collection,
     ManyToOne,
+    Rel
   } from '@mikro-orm/core'
   import { BaseEntity } from '../shared/db/baseEntity.entity.js'
 import { User } from './user.entity.js';
@@ -23,12 +24,12 @@ export class Compra extends BaseEntity {
     total!: number;
 
     @ManyToOne(() => User,{nullable:false})
-    user!: User;
+    user!: Rel<User>;
 
-    @OneToMany(() => LineaCompra, lc => lc.compra, { cascade: [Cascade.ALL]})
+    @OneToMany(() => LineaCompra, (lineaCompra) => lineaCompra.compra, { cascade: [Cascade.ALL], nullable: true })
     lineasCompras = new Collection<LineaCompra>(this);
 
-    constructor(user:User) {
+    constructor(user:Rel<User>) {
       super(); 
       this.fechaCompra = new Date();
       this.user = user;
