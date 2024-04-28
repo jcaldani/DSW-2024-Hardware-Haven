@@ -6,8 +6,9 @@ import {
     
   } from '@mikro-orm/core'
   
-import{Compra} from './compra.entity.js'
-//import{Componente} from './componente.entity.js'
+
+import{Componente} from './componente.entity.js'
+import { Compra } from './compra.entity.js';
 
 
 
@@ -26,17 +27,14 @@ export class LineaCompra{
     @ManyToOne(() => Compra,{primary:true, nullable:false})
     compra!: Compra;
 
-    /*@ManyToOne(() => Componente ,{nullable:false})
-    componente!: Componente;*/
+    @ManyToOne(() => Componente ,{nullable:false})
+    componente!: Componente;
 
-    constructor(cantidad:number, compra:Compra
-      //,componente:Componente
-    )
+    constructor(cantidad:number, compra:Compra, componente:Componente)
      {
-      
       this.cantidad = cantidad;
       this.compra = compra;
-      //this.componente = componente;
+      this.componente = componente;
   }
   setSubTotal(subTotal:number)
   {

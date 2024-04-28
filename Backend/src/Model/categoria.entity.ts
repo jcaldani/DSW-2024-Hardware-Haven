@@ -1,10 +1,11 @@
 import {
     Entity,
-    Property
+    Property,
+    ManyToOne,
   } from '@mikro-orm/core'
   import { BaseEntity } from '../shared/db/baseEntity.entity.js'
 
-//import {Componenete}  from './Componente.entity.js'
+import {Componente}  from './componente.entity.js'
 
 @Entity()
 export class Categoria extends BaseEntity {
@@ -12,16 +13,15 @@ export class Categoria extends BaseEntity {
     @Property({nullable:false})
     descripcion!: string;
 
-    /*@ManyToOne(() => Componente,{nullable:false})
-    componente!: Componente;*/
+    @ManyToOne(() => Componente,{nullable:false})
+    componente!: Componente;
 
 
     constructor(descripcion:string
-      //,componente:Componente
-     ) {
+      ,componente:Componente) {
       super(); 
       this.descripcion = descripcion;
-      //this.componente = componente;
+      this.componente = componente;
   }
 
 }

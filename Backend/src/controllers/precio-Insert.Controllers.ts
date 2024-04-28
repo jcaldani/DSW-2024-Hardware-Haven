@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 import { PrecioRepository } from '../repository/precioRespository.js';
 import { Precio } from '../model/precio.entity.js';
-//import { ComponenteRepository}from '../repository/componenteRespository.js';
+import { ComponenteRepository } from '../repository/componenteRepository.js';
+
 
 
 const precioRepo = new PrecioRepository();
-//const componenteRepo = new ComponenteRepository();
+const componenteRepo = new ComponenteRepository();
 
 const precioInsertController = async (req: Request, res: Response): Promise<void> => {       
     const {fechaDesde,
@@ -14,13 +15,11 @@ const precioInsertController = async (req: Request, res: Response): Promise<void
     } = req.body;  
 
     try{
-        //const componente = await componenteRepo.findOne({id:componenteId});
+        const componente = await componenteRepo.findOne({id:componenteId});
         const precio = await precioRepo.findOne({fechaDesde:fechaDesde, componenteId:componenteId});
 
-        if (precio === undefined) {
-            const new_precio = new Precio(fechaDesde, valor
-                //,componente
-            );
+        if (precio === undefined && componente !=undefined) {
+            const new_precio = new Precio(fechaDesde, valor,componente);
            precioRepo.add(new_precio);
            res.status(201).json({
                 data: new_precio,

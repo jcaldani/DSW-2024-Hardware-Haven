@@ -1,14 +1,14 @@
 import { Router } from "express";
 
-import compGetAllController from "../controllers/component-GetAll.Controllers.js";
-import compGetOneController from "../controllers/component-GetOne.Controllers.js";
-import compRegisterController from "../controllers/component-Register.Controllers.js";
-import compUpdateDescriptionController from "../controllers/component-UpdateDescription.Controllers.js";
-import compUpdateCompNameController from "../controllers/component-UpdateCompName.Controllers.js";
-import compDeleteOneController from "../controllers/component-DeleteOne.Controllers.js";
-import compUpdateController from "../controllers/component-Update.Controllers.js";
+import compGetAllController from "../controllers/componente-GetAll.Controllers.js";
+import compGetOneController from "../controllers/componente-GetOne.Controllers.js";
+import compInsertController from "../controllers/componente-Insert.Controllers.js";
+import compUpdateDescriptionController from "../controllers/componente-UpdateDescription.Controllers.js";
+import compUpdateCompNameController from "../controllers/componente-UpdateCompName.Controllers.js";
+import compDeleteOneController from "../controllers/componente-DeleteOne.Controllers.js";
+import compUpdateController from "../controllers/componente-Update.Controllers.js";
 //Imports de validaciones
-import {sanitizeCompInput} from "../dto/component-sanitize.dto.js"
+import {sanitizeComponenteInput} from "../security/componente-sanitize.dto .js"
 const compRouter = Router();
 
 
@@ -16,11 +16,11 @@ const compRouter = Router();
 //middlewares
 compRouter.get('/getAll', compGetAllController)
 compRouter.get('/getOne/:id', compGetOneController)
-compRouter.post('/register',sanitizeCompInput,  compRegisterController);
-compRouter.patch('/updateDescription/:id',sanitizeCompInput, compUpdateDescriptionController);
-compRouter.patch('/updateCompName/:id',sanitizeCompInput, compUpdateCompNameController);
+compRouter.post('/insert',sanitizeComponenteInput,  compInsertController);
+compRouter.patch('/updateDescription/:id',sanitizeComponenteInput, compUpdateDescriptionController);
+compRouter.patch('/updateCompName/:id',sanitizeComponenteInput, compUpdateCompNameController);
 compRouter.delete('/deleteOne/:id',compDeleteOneController);
-compRouter.put('/Update/:id',sanitizeCompInput, compUpdateController)
+compRouter.put('/Update/:id',sanitizeComponenteInput, compUpdateController)
 
 
 export default compRouter;

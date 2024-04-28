@@ -9,7 +9,7 @@ import {
   } from '@mikro-orm/core'
   
 
-//import {Componenete}  from './Componente.entity.js'
+import {Componente}  from './componente.entity.js'
 
 @Entity()
 export class Precio {
@@ -20,16 +20,14 @@ export class Precio {
     @Property({ type: 'decimal', precision: 9, scale: 3 })
     valor!: number;
 
-    /*@ManyToOne(() => Componente,{primary:true, nullable:false})
-    componente!: Componente;*/
+    @ManyToOne(() => Componente,{primary:true, nullable:false})
+    componente!: Componente;
 
-    constructor(fechaDesde:Date, valor:number
-      //,componente:Componente
-    ) {
+    constructor(fechaDesde:Date, valor:number,componente:Componente) {
    
       this.fechaDesde = fechaDesde;
       this.valor = valor;
-      //this.componente = componente;
+      this.componente = componente;
   }
 
 }

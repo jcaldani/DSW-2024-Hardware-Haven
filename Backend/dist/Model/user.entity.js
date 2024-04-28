@@ -7,9 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Entity, Property, } from '@mikro-orm/core';
+import { Entity, OneToMany, Property, Cascade, Collection, } from '@mikro-orm/core';
 import { BaseEntity } from '../shared/db/baseEntity.entity.js';
+import { Compra } from './compra.entity.js';
 export let User = class User extends BaseEntity {
+    constructor(name, password) {
+        super();
+        this.compras = new Collection(this);
+        this.name = name;
+        this.password = password;
+    }
 };
 __decorate([
     Property({ nullable: false }),
@@ -19,7 +26,12 @@ __decorate([
     Property({ nullable: false }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    OneToMany(() => Compra, c => c.user, { cascade: [Cascade.ALL] }),
+    __metadata("design:type", Object)
+], User.prototype, "compras", void 0);
 User = __decorate([
-    Entity()
+    Entity(),
+    __metadata("design:paramtypes", [String, String])
 ], User);
 //# sourceMappingURL=user.entity.js.map

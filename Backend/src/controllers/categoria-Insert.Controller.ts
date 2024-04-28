@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 import { CategoriaRepository } from '../repository/catergoriaRespository.js';
 import { Categoria } from '../model/categoria.entity.js';
+import { ComponenteRepository } from '../repository/componenteRepository.js';
 
 
 
 const categoriaRepo = new CategoriaRepository();
-//const componenteRepo = new ComponenteRepository();
+const componenteRepo = new ComponenteRepository();
 
 const categoriaInsertController = async (req: Request, res: Response): Promise<void> => {       
     const {categoriaId, descripcion, componenteId} = req.body; 
@@ -13,13 +14,12 @@ const categoriaInsertController = async (req: Request, res: Response): Promise<v
     try{
 
         const categoria = await categoriaRepo.findOne({id: categoriaId});
-        //const componente = await componenteRepo.findOne({id:componenteId});
+        const componente = await componenteRepo.findOne({id:componenteId});
      if (categoria === undefined 
-            //&& componente
+            && componente
         ) {
             
-             const new_categoria = new Categoria(descripcion
-                //,componente
+             const new_categoria = new Categoria(descripcion,componente
              );
                categoriaRepo.add(new_categoria);
                res.status(201).json({

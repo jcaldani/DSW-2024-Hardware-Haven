@@ -1,12 +1,10 @@
-import { User } from "../Model/user.entity.js";
+import { User } from "../model/user.entity.js";
 import { orm } from '../shared/db/orm.js';
 const em = orm.em;
 export class UserRepository {
     async findAll() {
         try {
-            const users = await em.find(User, {}
-            //,{ populate: ['compras'] }
-            );
+            const users = await em.find(User, {}, { populate: ['compras'] });
             return users;
         }
         catch (error) {
@@ -15,9 +13,7 @@ export class UserRepository {
     }
     async findOne(item) {
         try {
-            const user = await em.findOneOrFail(User, { id: item.id }
-            //,{ populate: ['compras'] }
-            );
+            const user = await em.findOneOrFail(User, { id: item.id }, { populate: ['compras'] });
             return user;
         }
         catch (error) {
@@ -43,7 +39,7 @@ export class UserRepository {
             return userToUpdate;
         }
         catch (error) {
-            return;
+            return undefined;
         }
     }
     async delete(item) {
@@ -59,9 +55,7 @@ export class UserRepository {
     }
     async findName(item) {
         try {
-            const user = await em.findOneOrFail(User, { name: item.name }
-            //,{ populate: ['compras'] }
-            );
+            const user = await em.findOneOrFail(User, { name: item.name }, { populate: ['compras'] });
             return user;
         }
         catch (error) {

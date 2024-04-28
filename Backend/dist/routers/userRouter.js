@@ -7,7 +7,7 @@ import userUpdateUserNameController from "../controllers/user-UpdateUserName.Con
 import userDeleteOneController from "../controllers/user-DeleteOne.Controllers.js";
 import userUpdateController from "../controllers/user-Update.Controllers.js";
 //Imports de validaciones
-import { sanitizeUserInput } from "../dto/user-sanitize.dto.js";
+import { sanitizeUserInput } from "../security/user-sanitize.dto.js";
 const userRouter = Router();
 //middlewares
 userRouter.get('/getAll', userGetAllController);
