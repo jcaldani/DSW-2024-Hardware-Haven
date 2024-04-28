@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express'
-import { User } from "../Model/user.entity.js";
+
+import { User } from "../model/user.entity.js";
 import { orm } from '../shared/db/orm.js'
 
 const em = orm.em;
@@ -11,7 +11,7 @@ export class UserRepository  {
             const users = await em.find(
                 User,
                 {}
-                //,{ populate: ['compras'] }
+                ,{ populate: ['compras'] }
             );
             return users;
         } catch (error: any) {
@@ -26,7 +26,7 @@ export class UserRepository  {
             const user = await em.findOneOrFail(
                 User,
                 { id: item.id }
-                //,{ populate: ['compras'] }
+                ,{ populate: ['compras'] }
             );
             return user;
         } catch (error: any) {
@@ -55,7 +55,7 @@ export class UserRepository  {
             return userToUpdate;
             
           } catch (error: any) {
-            return
+            return undefined;
           }
     }
 
@@ -78,7 +78,7 @@ export class UserRepository  {
             const user = await em.findOneOrFail(
                 User,
                 { name: item.name }
-                //,{ populate: ['compras'] }
+                ,{ populate: ['compras'] }
             );
             return user;
         } catch (error: any) {
