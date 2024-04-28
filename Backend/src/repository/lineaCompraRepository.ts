@@ -24,12 +24,12 @@ export class LineaCompraRepository  {
     async findOne(item: { nroLinea: number, compraId:number }): Promise<LineaCompra | undefined> {
         try {
             
-            const user = await em.findOneOrFail(
+            const liena_compra= await em.findOneOrFail(
                 LineaCompra,
                 { nroLinea: item.nroLinea, compra:{id: item.compraId} }
                 //,{ populate: ['compra', 'componente'] }
             );
-            return user;
+            return liena_compra;
         } catch (error: any) {
             return undefined;
         }
@@ -56,7 +56,7 @@ export class LineaCompraRepository  {
             return lineaCompraToUpdate;
             
           } catch (error: any) {
-            return
+            return undefined;
           }
     }
 
@@ -108,6 +108,11 @@ export class LineaCompraRepository  {
 
         async updateSubTotal(item: LineaCompra, newSubTotal:number): Promise<LineaCompra | undefined> {
             try {
+
+                if (!item.compra || !item.compra.id||!item.nroLinea) {
+                    console.error('ERROR');
+                    return undefined;
+                }
                 
                 const lineaCompraToUpdate = await this.findOne({ nroLinea: item.nroLinea, compraId: item.compra.id });
                 if (lineaCompraToUpdate) {

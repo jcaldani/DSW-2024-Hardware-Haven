@@ -12,7 +12,16 @@ export class Categoria extends BaseEntity {
     @Property({nullable:false})
     descripcion!: string;
 
-    /*@ManyToOne(() => Componente,{primary:true, nullable:false})
+    /*@ManyToOne(() => Componente,{nullable:false})
     componente!: Componente;*/
+
+
+    constructor(descripcion:string
+      //,componente:Componente
+     ) {
+      super(); 
+      this.descripcion = descripcion;
+      //this.componente = componente;
+  }
 
 }

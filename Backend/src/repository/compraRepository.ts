@@ -54,7 +54,7 @@ export class CompraRepository  {
             return compraToUpdate;
             
           } catch (error: any) {
-            return
+            return undefined;
           }
     }
 

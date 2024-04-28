@@ -55,7 +55,7 @@ export class UserRepository  {
             return userToUpdate;
             
           } catch (error: any) {
-            return
+            return undefined;
           }
     }
 

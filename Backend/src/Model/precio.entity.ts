@@ -18,9 +18,18 @@ export class Precio {
     fechaDesde!: Date;
     
     @Property({ type: 'decimal', precision: 9, scale: 3 })
-    precio!: number;
+    valor!: number;
 
     /*@ManyToOne(() => Componente,{primary:true, nullable:false})
     componente!: Componente;*/
+
+    constructor(fechaDesde:Date, valor:number
+      //,componente:Componente
+    ) {
+   
+      this.fechaDesde = fechaDesde;
+      this.valor = valor;
+      //this.componente = componente;
+  }
 
 }

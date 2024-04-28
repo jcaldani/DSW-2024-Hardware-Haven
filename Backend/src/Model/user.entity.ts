@@ -19,5 +19,10 @@ export class User extends BaseEntity {
     @OneToMany(() => Compra, c => c.user, { cascade: [Cascade.ALL] })
     compras = new Collection<Compra>(this);
 
+    constructor(name:string, password: string) {
+      super(); 
+      this.name = name;
+      this.password = password;
+  }
 }
 
