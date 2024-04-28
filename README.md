@@ -33,4 +33,3 @@ Plataforma en línea con una amplia gama de componentes de hardware para armar t
 |CUU/Epic|1. Descuentos<br>2. Cancelación de la compra|
 |Otros|1. Envío de ofertas o nuevos productos por email al cliente|
 
----------------
