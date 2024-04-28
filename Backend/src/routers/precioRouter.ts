@@ -7,7 +7,7 @@ import precioInsertController from "../controllers/precio-Insert.Controllers.js"
 import precioDeleteOneController from "../controllers/precio-DeleteOne.Controllers.js";
 import precioUpdateController from "../controllers/precio-Update.Controllers.js";
 
-import {sanitizePrecioInput} from "../dto/precio-sanitize.dto.js"
+import {sanitizePrecioInput} from "../security/precio-sanitize.dto.js"
 const precioRouter = Router();
 
 

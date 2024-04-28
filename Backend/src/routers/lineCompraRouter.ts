@@ -4,7 +4,7 @@ import lineaCompraGetOneController from "../controllers/lineaCompra-GetOne.Contr
 import lineaCompraInsertController from "../controllers/lineaCompra-Insert.Controller.js";
 import lineaCompraDeleteOneController from "../controllers/lineaCompra-DeleteOne.Controllers.js";
 import lineaCompraUpdateController from "../controllers/lineaCompra-Update.Controllers.js";
-import { sanitizeLineaCompraInput } from "../dto/lineaCompra-sanitize.dto.js";
+import { sanitizeLineaCompraInput } from "../security/lineaCompra-sanitize.dto.js";
 
 
 const lineaCompraRouter = Router();

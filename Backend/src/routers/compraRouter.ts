@@ -4,7 +4,7 @@ import compraGetOneController from "../controllers/compra-GetOne.Controller.js";
 import compraInsertController from "../controllers/compra-Insert.Controller.js";
 import compraDeleteOneController from "../controllers/compra-DeleteOne.Controllers.js";
 import compraUpdateController from "../controllers/compra-Update.Controllers.js";
-import { sanitizeCompraInput } from "../dto/compra-sanitize.dto.js";
+import { sanitizeCompraInput } from "../security/compra-sanitize.dto.js";
 
 
 const compraRouter = Router();
