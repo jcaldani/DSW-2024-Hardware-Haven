@@ -7,7 +7,7 @@ import categoriaRouter from "../routers/categoriaRouter.js";
 import precioRouter from "../routers/precioRouter.js";
 import lineaCompraRouter from "../routers/lineCompraRouter.js";
 import compraRouter from "../routers/compraRouter.js";
-import compRouter from "../routers/componentRouter.js";
+import compRouter from "../routers/componenteRouter.js";
 
 //import cors from 'cors';
 
@@ -29,7 +29,7 @@ HarwareHavenexpressApp.use('/api/compra', compraRouter);
 HarwareHavenexpressApp.use('/api/lineaCompra', lineaCompraRouter);
 HarwareHavenexpressApp.use('/api/precio', precioRouter);
 HarwareHavenexpressApp.use('/api/categoria', categoriaRouter);
-HarwareHavenexpressApp.use('/api/categoria', compRouter);
+HarwareHavenexpressApp.use('/api/componente', compRouter);
 
 
 

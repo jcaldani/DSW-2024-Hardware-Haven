@@ -10,7 +10,7 @@ const userRegisterController = async (req: Request, res: Response): Promise<void
     try{
         const user = await userRepo.findName({name: name});
 
-        if (user === undefined) {
+        if (!user) {
             const new_user = new User(name, password);
            userRepo.add(new_user);
            res.status(201).json({
