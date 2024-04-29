@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
-import { CompraRepository } from '../repository/compraRepository.js';
+
 import { LineaCompraRepository } from '../repository/lineaCompraRepository.js';
 
 
 const lineaCompraRepo = new LineaCompraRepository();
 
 const lineaCompraGetOneController = async (req: Request, res: Response): Promise<void> => {       
-    const {nroLinea, compraId} = req.body;
+    const {lineaId, compraId} = req.body;
 
     try{
-        const lineaCompra = await lineaCompraRepo.findOne({nroLinea: nroLinea, compraId:compraId});
+        const lineaCompra = await lineaCompraRepo.findOne({id: lineaId});
 
         if (lineaCompra) {
             res.status(200).json({

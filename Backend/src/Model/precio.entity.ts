@@ -6,6 +6,7 @@ import {
     Collection,
     ManyToOne,
     PrimaryKey,
+    Rel,
   } from '@mikro-orm/core'
   
 
@@ -21,9 +22,13 @@ export class Precio {
     valor!: number;
 
     @ManyToOne(() => Componente,{primary:true, nullable:false})
-    componente!: Componente;
+    componente!: Rel<Componente>;;
 
-    constructor(fechaDesde:Date, valor:number,componente:Componente) {
+    
+
+    
+
+    constructor(fechaDesde:Date, valor:number,componente:Rel<Componente>) {
    
       this.fechaDesde = fechaDesde;
       this.valor = valor;

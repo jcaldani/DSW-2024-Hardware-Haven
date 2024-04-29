@@ -7,11 +7,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Entity, Property, ManyToOne, PrimaryKey, } from '@mikro-orm/core';
+import { Entity, Property, ManyToOne, } from '@mikro-orm/core';
 import { Componente } from './componente.entity.js';
 import { Compra } from './compra.entity.js';
-export let LineaCompra = class LineaCompra {
+import { BaseEntity } from '../shared/db/baseEntity.entity.js';
+export let LineaCompra = class LineaCompra extends BaseEntity {
     constructor(cantidad, compra, componente) {
+        super();
         this.cantidad = cantidad;
         this.compra = compra;
         this.componente = componente;
@@ -21,10 +23,6 @@ export let LineaCompra = class LineaCompra {
     }
 };
 __decorate([
-    PrimaryKey(),
-    __metadata("design:type", Number)
-], LineaCompra.prototype, "nroLinea", void 0);
-__decorate([
     Property({ nullable: false }),
     __metadata("design:type", Number)
 ], LineaCompra.prototype, "cantidad", void 0);
@@ -33,7 +31,7 @@ __decorate([
     __metadata("design:type", Number)
 ], LineaCompra.prototype, "subTotal", void 0);
 __decorate([
-    ManyToOne(() => Compra, { primary: true, nullable: false }),
+    ManyToOne(() => Compra, { nullable: false }),
     __metadata("design:type", Object)
 ], LineaCompra.prototype, "compra", void 0);
 __decorate([

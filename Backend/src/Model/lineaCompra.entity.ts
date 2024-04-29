@@ -9,14 +9,13 @@ import {
 
 import{Componente} from './componente.entity.js'
 import { Compra } from './compra.entity.js';
+import { BaseEntity } from '../shared/db/baseEntity.entity.js';
 
 
 
   
 @Entity()
-export class LineaCompra{
-    @PrimaryKey()
-    nroLinea?: number
+export class LineaCompra extends BaseEntity{
 
     @Property({nullable:false})
     cantidad!: number;
@@ -24,7 +23,7 @@ export class LineaCompra{
     @Property({ type: 'decimal', precision: 9, scale: 3, nullable: true })
     subTotal!: number;
 
-    @ManyToOne(() => Compra,{primary:true, nullable:false})
+    @ManyToOne(() => Compra,{nullable:false})
     compra!: Rel<Compra>;
 
     @ManyToOne(() => Componente ,{nullable:false})
@@ -32,6 +31,7 @@ export class LineaCompra{
 
     constructor(cantidad:number, compra:Rel<Compra>, componente:Componente)
      {
+      super();
       this.cantidad = cantidad;
       this.compra = compra;
       this.componente = componente;

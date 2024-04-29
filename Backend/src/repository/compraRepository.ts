@@ -133,5 +133,12 @@ export class CompraRepository  {
                 return undefined;
         }
     
+
+
+        
+        
+
+
+
     }
 }

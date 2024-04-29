@@ -11,9 +11,7 @@ export class PrecioRepository  {
             const precios = await em.find(
                 Precio,
                 {}
-                ,{ populate: [
-                //, 'componente'
-            ] }
+                ,{ populate: ['componente'] }
             );
             return precios;
         } catch (error: any) {
@@ -28,9 +26,9 @@ export class PrecioRepository  {
             const precio = await em.findOneOrFail(
                 Precio,
                 { fechaDesde: item.fechaDesde, 
-                //    componente:{id: item.componenteId}
+                     componente:{id: item.componenteId}
                  }
-                //,{ populate: ['componente'] }
+                 ,{ populate: ['componente'] }
             );
             return precio;
         } catch (error: any) {
@@ -50,9 +48,11 @@ export class PrecioRepository  {
           }
     }
 
-    /*
+    
     async update(item: Precio): Promise<Precio | undefined>{
         try {            
+
+            if(!item.componente.id){return undefined;}
             
             const precioToUpdate = await this.findOne({fechaDesde:item.fechaDesde, componenteId:item.componente.id })
             if(precioToUpdate){
@@ -68,7 +68,7 @@ export class PrecioRepository  {
             return undefined;
           }
     }
-    */
+    
 
     async delete(item: { fechaDesde: Date, componenteId:number }): Promise<Precio | undefined> {
         try {
@@ -92,7 +92,7 @@ export class PrecioRepository  {
    
 
 
- /*
+ 
     async updateValor(item: Precio, newValor:number): Promise<Precio | undefined> {
         try {
             
@@ -115,7 +115,7 @@ export class PrecioRepository  {
             return undefined;
         }
         }
-        */
+        
 
        
 

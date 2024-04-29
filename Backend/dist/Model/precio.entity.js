@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Entity, Property, ManyToOne, PrimaryKey, } from '@mikro-orm/core';
 import { Componente } from './componente.entity.js';
 export let Precio = class Precio {
+    ;
     constructor(fechaDesde, valor, componente) {
         this.fechaDesde = fechaDesde;
         this.valor = valor;
@@ -26,10 +27,10 @@ __decorate([
 ], Precio.prototype, "valor", void 0);
 __decorate([
     ManyToOne(() => Componente, { primary: true, nullable: false }),
-    __metadata("design:type", Componente)
+    __metadata("design:type", Object)
 ], Precio.prototype, "componente", void 0);
 Precio = __decorate([
     Entity(),
-    __metadata("design:paramtypes", [Date, Number, Componente])
+    __metadata("design:paramtypes", [Date, Number, Object])
 ], Precio);
 //# sourceMappingURL=precio.entity.js.map

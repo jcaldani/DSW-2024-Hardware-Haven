@@ -39,7 +39,7 @@ export class ComponenteRepository {
             return compToUpdate;
         }
         catch (error) {
-            return;
+            return undefined;
         }
     }
     async delete(item) {

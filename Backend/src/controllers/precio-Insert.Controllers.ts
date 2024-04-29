@@ -9,10 +9,7 @@ const precioRepo = new PrecioRepository();
 const componenteRepo = new ComponenteRepository();
 
 const precioInsertController = async (req: Request, res: Response): Promise<void> => {       
-    const {fechaDesde,
-        componenteId,
-        valor
-    } = req.body;  
+    const {fechaDesde, componenteId, valor} = req.body;  
 
     try{
         const componente = await componenteRepo.findOne({id:componenteId});

@@ -10,7 +10,7 @@ export class CategoriaRepository  {
             const categorias = await em.find(
                 Categoria,
                 {}
-                //,{ populate: ['componente'] }
+                ,{ populate: ['componentes'] }
             );
             return categorias;
         } catch (error: any) {
@@ -25,7 +25,7 @@ export class CategoriaRepository  {
             return await em.findOneOrFail(
                 Categoria,
                 { id:item.id}
-                //,{ populate: ['componente'] }
+                ,{ populate: ['componentes'] }
             );
              
         } catch (error: any) {
@@ -115,7 +115,19 @@ export class CategoriaRepository  {
         }
 
        
-
+        async findByDescription(item: { descripcion: string }): Promise<Categoria | undefined> {
+            try {
+                
+                const categoria = await em.findOneOrFail(
+                    Categoria,
+                    { descripcion: item.descripcion }
+                    ,{ populate: ['componentes'] }
+                );
+                return categoria;
+            } catch (error: any) {
+                return undefined;
+            }
+        }
 
 
 }

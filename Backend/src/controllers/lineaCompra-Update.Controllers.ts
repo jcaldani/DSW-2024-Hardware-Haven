@@ -9,14 +9,12 @@ const lineaCompraRepo = new LineaCompraRepository();
 const componenteRepo = new ComponenteRepository();
 
 const lineaCompraUpdateController = async (req: Request, res: Response): Promise<void> => {       
-    const {nroLinea, compraId, cantidad, subTotal
-        ,componenteId
-    } = req.body; 
+    const {lineaId, compraId, cantidad, subTotal,componenteId} = req.body; 
     
 
     try{
         const compra = await compraRepo.findOne({id: compraId});
-        const lineaCompra = await lineaCompraRepo.findOne({nroLinea: nroLinea, compraId:compraId});
+        const lineaCompra = await lineaCompraRepo.findOne({id: lineaId});
         const componente = await componenteRepo.findOne({id:componenteId});
        
         if (compra && lineaCompra && componente) {

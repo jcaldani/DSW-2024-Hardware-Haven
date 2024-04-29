@@ -7,9 +7,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Entity, Property, } from '@mikro-orm/core';
+import { Cascade, Collection, Entity, ManyToOne, OneToMany, Property, } from '@mikro-orm/core';
 import { BaseEntity } from '../shared/db/baseEntity.entity.js';
+import { Categoria } from './categoria.entity.js';
+import { Precio } from './precio.entity.js';
 export let Componente = class Componente extends BaseEntity {
+    constructor(name, description, categoria) {
+        super();
+        this.precios = new Collection(this);
+        this.name = name;
+        this.description = description;
+        this.categoria = categoria;
+    }
 };
 __decorate([
     Property({ nullable: false }),
@@ -19,7 +28,16 @@ __decorate([
     Property({ nullable: false }),
     __metadata("design:type", String)
 ], Componente.prototype, "description", void 0);
+__decorate([
+    ManyToOne(() => Categoria, { nullable: false }),
+    __metadata("design:type", Object)
+], Componente.prototype, "categoria", void 0);
+__decorate([
+    OneToMany(() => Precio, (precio) => precio.componente, { cascade: [Cascade.ALL], nullable: true }),
+    __metadata("design:type", Object)
+], Componente.prototype, "precios", void 0);
 Componente = __decorate([
-    Entity()
+    Entity(),
+    __metadata("design:paramtypes", [String, String, Object])
 ], Componente);
 //# sourceMappingURL=componente.entity.js.map

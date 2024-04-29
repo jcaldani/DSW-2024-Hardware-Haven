@@ -4,8 +4,8 @@ const em = orm.em;
 export class LineaCompraRepository {
     async findAll() {
         try {
-            const lineaCompras = await em.find(LineaCompra, {}, { populate: ['compra'
-                    //, 'componente'
+            const lineaCompras = await em.find(LineaCompra, {}, { populate: ['compra',
+                    'componente'
                 ] });
             return lineaCompras;
         }
@@ -15,9 +15,7 @@ export class LineaCompraRepository {
     }
     async findOne(item) {
         try {
-            const liena_compra = await em.findOneOrFail(LineaCompra, { nroLinea: item.nroLinea, compra: { id: item.compraId } }
-            //,{ populate: ['compra', 'componente'] }
-            );
+            const liena_compra = await em.findOneOrFail(LineaCompra, { nroLinea: item.nroLinea, compra: { id: item.compraId } }, { populate: ['compra', 'componente'] });
             return liena_compra;
         }
         catch (error) {

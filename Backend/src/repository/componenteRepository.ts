@@ -54,7 +54,7 @@ export class ComponenteRepository  {
             return compToUpdate;
             
           } catch (error: any) {
-            return
+            return undefined;
           }
     }
 

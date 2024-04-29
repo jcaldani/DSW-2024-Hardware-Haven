@@ -1,14 +1,15 @@
 import { ComponenteRepository } from "../repository/componenteRepository.js";
 import { Componente } from '../model/componente.entity.js';
+import { CategoriaRepository } from '../repository/catergoriaRespository.js';
 const compRepo = new ComponenteRepository();
+const categoriaRepo = new CategoriaRepository();
 const compInsertController = async (req, res) => {
-    const { name, description } = req.body;
+    const { name, description, categoriaId } = req.body;
     try {
         const comp = await compRepo.findName({ name: name });
-        if (comp === undefined) {
-            const new_comp = new Componente();
-            new_comp.name = name;
-            new_comp.description = description;
+        const categoria = await categoriaRepo.findOne({ id: categoriaId });
+        if (!comp && categoria) {
+            const new_comp = new Componente(name, description, categoria);
             compRepo.add(new_comp);
             res.status(201).json({
                 data: new_comp,

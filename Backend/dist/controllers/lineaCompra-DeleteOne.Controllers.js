@@ -1,11 +1,11 @@
 import { LineaCompraRepository } from '../repository/lineaCompraRepository.js';
 const lineaCompraRepo = new LineaCompraRepository();
 const lineaCompraDeleteOneController = async (req, res) => {
-    const { nroLinea, compraId } = req.body;
+    const { lineaId, compraId } = req.body;
     try {
-        const lineaCompra = await lineaCompraRepo.findOne({ nroLinea: nroLinea, compraId: compraId });
+        const lineaCompra = await lineaCompraRepo.findOne({ id: lineaId });
         if (lineaCompra) {
-            if (!lineaCompra.nroLinea || !lineaCompra.compra.id) {
+            if (!lineaCompra.id || !lineaCompra.compra.id) {
                 res.status(404).json({
                     data: undefined,
                     message: 'lineaCompra incorrect credentials'
