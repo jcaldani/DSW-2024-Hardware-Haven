@@ -39,20 +39,23 @@ const lineaCompraInsertController = async (req, res) => {
                 data: lineaCompraAdded,
                 message: "The lineaCompra was added"
             });
-            return;
         }
         else {
             const precioCompActual = componente.precios.reduce((prev, current) => (prev.fechaDesde > current.fechaDesde) ? prev : current);
             if (precioCompActual && precioCompActual.valor) {
                 lineaCompra.subTotal = ((lineaCompra.cantidad + parseInt(cantidad)) * precioCompActual.valor);
             }
+            else {
+                lineaCompra.subTotal = 0;
+            }
             await lineaCompraRepo.updateCantidad(lineaCompra, lineaCompra.cantidad + parseInt(cantidad));
             res.status(200).json({
                 data: lineaCompra,
                 message: "The lineaCompra already exists and it was updated"
             });
-            return;
         }
+        await compraRepo.calculateTotal(compra); //Calcula el total de la compra
+        return;
     }
     catch (error) {
         console.error(error);

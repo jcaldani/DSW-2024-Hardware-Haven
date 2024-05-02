@@ -77,19 +77,19 @@ Content-Type: application/json
 GET http://localhost:3000/api/componente/getAll
 
 ###GetOne
-GET http://localhost:3000/api/componente/getOne/2
+GET http://localhost:3000/api/componente/getOne/:id
 
 ###Post 
 POST  http://localhost:3000/api/componente/insert
 Content-Type: application/json
 
 {
-"name":"Atom seleron 1", 
-"description":"Mouse low",
+"name":"TOYIBA", 
+"description":"CAPUTACHA",
 "categoriaId":"3"
 }
 ###Delete
-DELETE  http://localhost:3000/api/componente/deleteOne/:id
+DELETE  http://localhost:3000/api/componente/deleteOne/4
 
 ###Put
 PUT   http://localhost:3000/api/componente/update/2
@@ -144,6 +144,37 @@ Content-Type: application/json
 }
 
 
+
+//------------------Precio-------------------------------
+###GetAll 
+GET http://localhost:3000/api/precio/getAll
+
+###GetOne
+GET http://localhost:3000/api/precio/getOne/:id
+
+###Post 
+POST  http://localhost:3000/api/precio/insert
+Content-Type: application/json
+
+{
+"fechaDesde":"20240502",
+"componenteId":"6",
+"valor":"10"
+}
+###Delete
+DELETE  http://localhost:3000/api/precio/deleteOne/:id
+
+###Put
+PUT   http://localhost:3000/api/precio/update/:id
+Content-Type: application/json
+
+{
+"fechaDesde":"",
+"componenteId":"",
+"valor":""
+}
+
+
 //------------------LineaCompra-------------------------------
 ###GetAll 
 GET http://localhost:3000/api/lineaCompra/getAll
@@ -158,7 +189,7 @@ Content-Type: application/json
 {
   "compraId": "2",
   "cantidad": "2",
-  "componenteId": "4"
+  "componenteId": "6"
 }
 ###Delete
 DELETE  http://localhost:3000/api/lineaCompra/deleteOne/:id
@@ -169,36 +200,7 @@ Content-Type: application/json
 
 {
 "compraId":"2", 
-"cantidad":"0", 
-"subTotal":"0",
+"cantidad":"20", 
+"subTotal":"20",
 "componenteId":"4"
-}
-
-//------------------Precio-------------------------------
-###GetAll 
-GET http://localhost:3000/api/precio/getAll
-
-###GetOne
-GET http://localhost:3000/api/precio/getOne/:id
-
-###Post 
-POST  http://localhost:3000/api/precio/insert
-Content-Type: application/json
-
-{
-"fechaDesde":"",
-"componenteId":"",
-"valor":""
-}
-###Delete
-DELETE  http://localhost:3000/api/precio/deleteOne/:id
-
-###Put
-PUT   http://localhost:3000/api/precio/update/:id
-Content-Type: application/json
-
-{
-"fechaDesde":"",
-"componenteId":"",
-"valor":""
 }

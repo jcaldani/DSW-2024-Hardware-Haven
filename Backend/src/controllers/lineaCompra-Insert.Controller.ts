@@ -63,6 +63,7 @@ const lineaCompraInsertController = async (req: Request, res: Response): Promise
                 if(precioCompActual && precioCompActual.valor){
                     lineaCompra.subTotal = ((lineaCompra.cantidad + parseInt(cantidad)) * precioCompActual.valor)
                 }
+                else{lineaCompra.subTotal = 0;}
                 
             await lineaCompraRepo.updateCantidad(lineaCompra, lineaCompra.cantidad + parseInt(cantidad))
             res.status(200).json({

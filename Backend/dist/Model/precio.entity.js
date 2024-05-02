@@ -11,7 +11,6 @@ import { Entity, Property, ManyToOne, } from '@mikro-orm/core';
 import { Componente } from './componente.entity.js';
 import { BaseEntity } from '../shared/db/baseEntity.entity.js';
 export let Precio = class Precio extends BaseEntity {
-    ;
     constructor(fechaDesde, valor, componente) {
         super();
         this.fechaDesde = fechaDesde;
@@ -28,7 +27,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Precio.prototype, "valor", void 0);
 __decorate([
-    ManyToOne(() => Componente, { primary: true, nullable: false }),
+    ManyToOne(() => Componente, { nullable: false }),
     __metadata("design:type", Object)
 ], Precio.prototype, "componente", void 0);
 Precio = __decorate([
