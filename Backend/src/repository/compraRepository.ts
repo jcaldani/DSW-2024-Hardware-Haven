@@ -1,4 +1,5 @@
 import { Compra } from '../model/compra.entity.js';
+import { LineaCompra } from '../model/lineaCompra.entity.js';
 import { orm } from '../shared/db/orm.js';
 
 const em = orm.em;
@@ -132,13 +133,16 @@ export class CompraRepository  {
         } catch (error: any) {
                 return undefined;
         }
-    
-
-
-        
-        
-
-
-
+    }
+    async calculateTotal(item: Compra): Promise<Compra | undefined>{
+        try {
+            const id = item.id;
+            const compraToUpdate = await em.findOneOrFail(Compra, { id });
+            compraToUpdate.total = compraToUpdate.lineasCompras.reduce((accumulator:number, currentValue:LineaCompra) => accumulator + currentValue.subTotal, 0);
+           await em.persistAndFlush(compraToUpdate);
+           return compraToUpdate;
+        } catch (error: any) {
+                return undefined;
+        }
     }
 }

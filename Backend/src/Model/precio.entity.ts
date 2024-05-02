@@ -11,11 +11,12 @@ import {
   
 
 import {Componente}  from './componente.entity.js'
+import { BaseEntity } from '../shared/db/baseEntity.entity.js';
 
 @Entity()
-export class Precio {
+export class Precio extends BaseEntity {
 
-    @PrimaryKey({nullable:false})
+    @Property({nullable:false})
     fechaDesde!: Date;
     
     @Property({ type: 'decimal', precision: 9, scale: 3 })
@@ -29,7 +30,7 @@ export class Precio {
     
 
     constructor(fechaDesde:Date, valor:number,componente:Rel<Componente>) {
-   
+      super();
       this.fechaDesde = fechaDesde;
       this.valor = valor;
       this.componente = componente;

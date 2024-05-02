@@ -20,6 +20,13 @@ const lineaCompraInsertController = async (req, res) => {
         const lineaCompra = compra.lineasCompras.find(linea => linea.componente.id === componente.id);
         if (!lineaCompra) {
             const new_lineaCompra = new LineaCompra(cantidad, compra, componente);
+            const precioCompActual = componente.precios.reduce((prev, current) => (prev.fechaDesde > current.fechaDesde) ? prev : current);
+            if (precioCompActual && precioCompActual.valor) {
+                new_lineaCompra.subTotal = (new_lineaCompra.cantidad * precioCompActual.valor);
+            }
+            else {
+                new_lineaCompra.subTotal = 0;
+            }
             const lineaCompraAdded = await lineaCompraRepo.add(new_lineaCompra);
             if (!lineaCompraAdded) {
                 res.status(500).json({
@@ -35,8 +42,12 @@ const lineaCompraInsertController = async (req, res) => {
             return;
         }
         else {
-            await lineaCompraRepo.updateCantidad(lineaCompra, lineaCompra.cantidad + cantidad);
-            res.status(201).json({
+            const precioCompActual = componente.precios.reduce((prev, current) => (prev.fechaDesde > current.fechaDesde) ? prev : current);
+            if (precioCompActual && precioCompActual.valor) {
+                lineaCompra.subTotal = ((lineaCompra.cantidad + parseInt(cantidad)) * precioCompActual.valor);
+            }
+            await lineaCompraRepo.updateCantidad(lineaCompra, lineaCompra.cantidad + parseInt(cantidad));
+            res.status(200).json({
                 data: lineaCompra,
                 message: "The lineaCompra already exists and it was updated"
             });

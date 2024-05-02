@@ -1,19 +1,18 @@
 import { Request, Response } from 'express';
 import { PrecioRepository } from '../repository/precioRespository.js';
-//import { ComponenteRepository}from '../repository/componenteRespository.js';
+
+
 
 const precioRepo = new PrecioRepository();
-//const componenteRepo = new ComponenteRepository();
+
 
 
 const precioGetOneController = async (req: Request, res: Response): Promise<void> => {       
-    const {fechaDesde,
-        componenteId
-    } = req.body; 
+    const id =  parseInt(req.params.id);
 
     try{
-         //const componente = await componenteRepo.findOne({id:componenteId});
-         const precio = await precioRepo.findOne({fechaDesde:fechaDesde, componenteId:componenteId});
+         
+         const precio = await precioRepo.findOne({id:id});
 
         if (precio) {
             res.status(200).json({
