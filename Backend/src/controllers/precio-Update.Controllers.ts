@@ -1,24 +1,24 @@
 import { Request, Response } from 'express';
 import { PrecioRepository } from '../repository/precioRespository.js';
 import { Precio } from '../model/precio.entity.js';
-//import { ComponenteRepository}from '../repository/componenteRespository.js';
+import { ComponenteRepository } from '../repository/componenteRepository.js';
+
 
 const precioRepo = new PrecioRepository();
-//const componenteRepo = new ComponenteRepository();
+const componenteRepo = new ComponenteRepository();
 
 const precioUpdateController = async (req: Request, res: Response): Promise<void> => {       
-    const {fechaDesde,
-        componenteId,
-        valor
-    } = req.body; 
+    const id =  parseInt(req.params.id);
+    const {fechaDesde, componenteId, valor} = req.body; 
 
     try{
-          /*const componente = await componenteRepo.findOne({id:componenteId});
-          const precio = await precioRepo.findOne({fechaDesde:fechaDesde, componenteId:componenteId});
+          const componente = await componenteRepo.findOne({id:componenteId});
+          const precio = await precioRepo.findOne({id:id});
 
        
         if (precio) {
             precio.valor = valor;
+
             const precio_updated = await precioRepo.update(precio);
             res.status(200).json({
                 data: precio_updated,
@@ -29,7 +29,7 @@ const precioUpdateController = async (req: Request, res: Response): Promise<void
                 data: undefined,
                 message: 'precio incorrect credentials'
             });
-        }*/
+        }
 
     }
     catch (error) {

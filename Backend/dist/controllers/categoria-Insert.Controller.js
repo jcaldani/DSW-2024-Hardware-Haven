@@ -4,13 +4,11 @@ import { ComponenteRepository } from '../repository/componenteRepository.js';
 const categoriaRepo = new CategoriaRepository();
 const componenteRepo = new ComponenteRepository();
 const categoriaInsertController = async (req, res) => {
-    const { categoriaId, descripcion, componenteId } = req.body;
+    const { descripcion } = req.body;
     try {
-        const categoria = await categoriaRepo.findOne({ id: categoriaId });
-        const componente = await componenteRepo.findOne({ id: componenteId });
-        if (categoria === undefined
-            && componente) {
-            const new_categoria = new Categoria(descripcion, componente);
+        const categoria = await categoriaRepo.findByDescription(descripcion);
+        if (!categoria) {
+            const new_categoria = new Categoria(descripcion);
             categoriaRepo.add(new_categoria);
             res.status(201).json({
                 data: new_categoria,

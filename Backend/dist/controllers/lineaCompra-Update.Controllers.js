@@ -5,10 +5,11 @@ const compraRepo = new CompraRepository();
 const lineaCompraRepo = new LineaCompraRepository();
 const componenteRepo = new ComponenteRepository();
 const lineaCompraUpdateController = async (req, res) => {
-    const { nroLinea, compraId, cantidad, subTotal, componenteId } = req.body;
+    const id = parseInt(req.params.id);
+    const { compraId, cantidad, subTotal, componenteId } = req.body;
     try {
         const compra = await compraRepo.findOne({ id: compraId });
-        const lineaCompra = await lineaCompraRepo.findOne({ nroLinea: nroLinea, compraId: compraId });
+        const lineaCompra = await lineaCompraRepo.findOne({ id: id });
         const componente = await componenteRepo.findOne({ id: componenteId });
         if (compra && lineaCompra && componente) {
             lineaCompra.cantidad = cantidad;

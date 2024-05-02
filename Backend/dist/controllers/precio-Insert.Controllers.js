@@ -7,8 +7,8 @@ const precioInsertController = async (req, res) => {
     const { fechaDesde, componenteId, valor } = req.body;
     try {
         const componente = await componenteRepo.findOne({ id: componenteId });
-        const precio = await precioRepo.findOne({ fechaDesde: fechaDesde, componenteId: componenteId });
-        if (precio === undefined && componente != undefined) {
+        const precio = await componente?.precios.find(x => x.fechaDesde === fechaDesde);
+        if (!precio && componente) {
             const new_precio = new Precio(fechaDesde, valor, componente);
             precioRepo.add(new_precio);
             res.status(201).json({

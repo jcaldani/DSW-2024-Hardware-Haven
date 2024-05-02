@@ -7,17 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Entity, Property, ManyToOne, PrimaryKey, } from '@mikro-orm/core';
+import { Entity, Property, ManyToOne, } from '@mikro-orm/core';
 import { Componente } from './componente.entity.js';
-export let Precio = class Precio {
+import { BaseEntity } from '../shared/db/baseEntity.entity.js';
+export let Precio = class Precio extends BaseEntity {
+    ;
     constructor(fechaDesde, valor, componente) {
+        super();
         this.fechaDesde = fechaDesde;
         this.valor = valor;
         this.componente = componente;
     }
 };
 __decorate([
-    PrimaryKey({ nullable: false }),
+    Property({ nullable: false }),
     __metadata("design:type", Date)
 ], Precio.prototype, "fechaDesde", void 0);
 __decorate([
@@ -26,10 +29,10 @@ __decorate([
 ], Precio.prototype, "valor", void 0);
 __decorate([
     ManyToOne(() => Componente, { primary: true, nullable: false }),
-    __metadata("design:type", Componente)
+    __metadata("design:type", Object)
 ], Precio.prototype, "componente", void 0);
 Precio = __decorate([
     Entity(),
-    __metadata("design:paramtypes", [Date, Number, Componente])
+    __metadata("design:paramtypes", [Date, Number, Object])
 ], Precio);
 //# sourceMappingURL=precio.entity.js.map

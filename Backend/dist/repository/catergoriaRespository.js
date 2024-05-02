@@ -4,9 +4,7 @@ const em = orm.em;
 export class CategoriaRepository {
     async findAll() {
         try {
-            const categorias = await em.find(Categoria, {}
-            //,{ populate: ['componente'] }
-            );
+            const categorias = await em.find(Categoria, {}, { populate: ['componentes'] });
             return categorias;
         }
         catch (error) {
@@ -15,9 +13,7 @@ export class CategoriaRepository {
     }
     async findOne(item) {
         try {
-            return await em.findOneOrFail(Categoria, { id: item.id }
-            //,{ populate: ['componente'] }
-            );
+            return await em.findOneOrFail(Categoria, { id: item.id }, { populate: ['componentes'] });
         }
         catch (error) {
             return undefined;
@@ -87,6 +83,15 @@ export class CategoriaRepository {
                 console.error('Categoria not found');
                 return undefined;
             }
+        }
+        catch (error) {
+            return undefined;
+        }
+    }
+    async findByDescription(item) {
+        try {
+            const categoria = await em.findOneOrFail(Categoria, { descripcion: item.descripcion }, { populate: ['componentes'] });
+            return categoria;
         }
         catch (error) {
             return undefined;

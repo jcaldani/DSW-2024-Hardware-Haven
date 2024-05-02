@@ -1,14 +1,11 @@
 import { PrecioRepository } from '../repository/precioRespository.js';
-//import { ComponenteRepository}from '../repository/componenteRespository.js';
 const precioRepo = new PrecioRepository();
-//const componenteRepo = new ComponenteRepository();
 const precioDeleteOneController = async (req, res) => {
-    const { fechaDesde, componenteId } = req.body;
+    const id = parseInt(req.params.id);
     try {
-        //const componente = await componenteRepo.findOne({id:componenteId});
-        const precio = await precioRepo.findOne({ fechaDesde: fechaDesde, componenteId: componenteId });
+        const precio = await precioRepo.findOne({ id: id });
         if (precio) {
-            const precio_deleted = await precioRepo.delete({ fechaDesde: fechaDesde, componenteId: componenteId });
+            const precio_deleted = await precioRepo.delete({ id: id });
             res.status(200).json({
                 data: precio_deleted,
                 message: "The precio was deleted"

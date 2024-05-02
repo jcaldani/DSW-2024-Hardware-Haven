@@ -11,7 +11,7 @@ export class LineaCompraRepository  {
                 LineaCompra,
                 {}
                 ,{ populate: ['compra'
-                //, 'componente'
+                , 'componente'
             ] }
             );
             return lineaCompras;
@@ -21,21 +21,21 @@ export class LineaCompraRepository  {
     }
     
 
-    async findOne(item: { nroLinea: number, compraId:number }): Promise<LineaCompra | undefined> {
+    async findOne(item: { id: number }): Promise<LineaCompra | undefined> {
         try {
-            
+           
             const liena_compra= await em.findOneOrFail(
                 LineaCompra,
-                { nroLinea: item.nroLinea, compra:{id: item.compraId} }
-                //,{ populate: ['compra', 'componente'] }
+                { id: item.id }
+                ,{ populate: ['compra', 'componente'] }
             );
             return liena_compra;
+            
         } catch (error: any) {
             return undefined;
         }
     }
 
-    
 
     async add(item: LineaCompra): Promise<LineaCompra | undefined> {
         try {
@@ -49,8 +49,7 @@ export class LineaCompraRepository  {
 
     async update(item: LineaCompra): Promise<LineaCompra | undefined>{
         try {            
-            const nroLinea = item.nroLinea;
-            const lineaCompraToUpdate = await em.findOneOrFail(LineaCompra, { nroLinea, compra:{id:item.compra.id} })
+            const lineaCompraToUpdate = await em.findOneOrFail(LineaCompra, { id:item.id })
             em.assign(lineaCompraToUpdate, item)
             await em.flush()
             return lineaCompraToUpdate;
@@ -60,7 +59,7 @@ export class LineaCompraRepository  {
           }
     }
 
-    async delete(item: { nroLinea: number, compraId:number }): Promise<LineaCompra | undefined> {
+    async delete(item: { id: number}): Promise<LineaCompra | undefined> {
         try {
             
               
@@ -86,11 +85,11 @@ export class LineaCompraRepository  {
     async updateCantidad(item: LineaCompra, newCantidad:number): Promise<LineaCompra | undefined> {
         try {
             
-            if (!item.compra || !item.compra.id||!item.nroLinea) {
+            if (!item.compra || !item.compra.id||!item.id) {
                 console.error('ERROR');
                 return undefined;
             }
-            const lineaCompraToUpdate = await this.findOne({ nroLinea: item.nroLinea, compraId: item.compra.id });
+            const lineaCompraToUpdate = await this.findOne({ id: item.id});
             if (lineaCompraToUpdate) {
             lineaCompraToUpdate.cantidad = newCantidad;
             await em.persistAndFlush(lineaCompraToUpdate);
@@ -109,12 +108,12 @@ export class LineaCompraRepository  {
         async updateSubTotal(item: LineaCompra, newSubTotal:number): Promise<LineaCompra | undefined> {
             try {
 
-                if (!item.compra || !item.compra.id||!item.nroLinea) {
+                if (!item.compra || !item.compra.id||!item.id) {
                     console.error('ERROR');
                     return undefined;
                 }
                 
-                const lineaCompraToUpdate = await this.findOne({ nroLinea: item.nroLinea, compraId: item.compra.id });
+                const lineaCompraToUpdate = await this.findOne({ id: item.id});
                 if (lineaCompraToUpdate) {
                 lineaCompraToUpdate.subTotal = newSubTotal;
                 await em.persistAndFlush(lineaCompraToUpdate);
@@ -129,6 +128,8 @@ export class LineaCompraRepository  {
                 return undefined;
             }
             }
+
+           
 
 
 }

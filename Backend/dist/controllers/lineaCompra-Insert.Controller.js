@@ -6,24 +6,53 @@ const compraRepo = new CompraRepository();
 const lineaCompraRepo = new LineaCompraRepository();
 const componenteRepo = new ComponenteRepository();
 const lineaCompraInsertController = async (req, res) => {
-    const { nroLinea, compraId, cantidad, componenteId } = req.body;
+    const { compraId, cantidad, componenteId } = req.body;
     try {
         const componente = await componenteRepo.findOne({ id: componenteId });
         const compra = await compraRepo.findOne({ id: compraId });
-        const lineaCompra = await lineaCompraRepo.findOne({ nroLinea: nroLinea, compraId: compraId });
-        if (!compra || !lineaCompra || !componente) {
+        if (!compra || !componente) {
             res.status(404).json({
                 data: undefined,
                 message: "Error in lineaCompra data"
             });
             return;
         }
-        const new_lineaCompra = new LineaCompra(cantidad, compra, componente);
-        lineaCompraRepo.add(new_lineaCompra);
-        res.status(201).json({
-            data: new_lineaCompra,
-            message: "The lineaCompra was added"
-        });
+        const lineaCompra = compra.lineasCompras.find(linea => linea.componente.id === componente.id);
+        if (!lineaCompra) {
+            const new_lineaCompra = new LineaCompra(cantidad, compra, componente);
+            const precioCompActual = componente.precios.reduce((prev, current) => (prev.fechaDesde > current.fechaDesde) ? prev : current);
+            if (precioCompActual && precioCompActual.valor) {
+                new_lineaCompra.subTotal = (new_lineaCompra.cantidad * precioCompActual.valor);
+            }
+            else {
+                new_lineaCompra.subTotal = 0;
+            }
+            const lineaCompraAdded = await lineaCompraRepo.add(new_lineaCompra);
+            if (!lineaCompraAdded) {
+                res.status(500).json({
+                    data: undefined,
+                    message: 'There was a server error'
+                });
+                return;
+            }
+            res.status(201).json({
+                data: lineaCompraAdded,
+                message: "The lineaCompra was added"
+            });
+            return;
+        }
+        else {
+            const precioCompActual = componente.precios.reduce((prev, current) => (prev.fechaDesde > current.fechaDesde) ? prev : current);
+            if (precioCompActual && precioCompActual.valor) {
+                lineaCompra.subTotal = ((lineaCompra.cantidad + parseInt(cantidad)) * precioCompActual.valor);
+            }
+            await lineaCompraRepo.updateCantidad(lineaCompra, lineaCompra.cantidad + parseInt(cantidad));
+            res.status(200).json({
+                data: lineaCompra,
+                message: "The lineaCompra already exists and it was updated"
+            });
+            return;
+        }
     }
     catch (error) {
         console.error(error);
@@ -31,6 +60,7 @@ const lineaCompraInsertController = async (req, res) => {
             data: undefined,
             message: 'There was a server error'
         });
+        return;
     }
 };
 export default lineaCompraInsertController;

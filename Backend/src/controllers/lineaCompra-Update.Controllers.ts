@@ -9,14 +9,14 @@ const lineaCompraRepo = new LineaCompraRepository();
 const componenteRepo = new ComponenteRepository();
 
 const lineaCompraUpdateController = async (req: Request, res: Response): Promise<void> => {       
-    const {nroLinea, compraId, cantidad, subTotal
-        ,componenteId
-    } = req.body; 
+    const id =  parseInt(req.params.id);
+    const {compraId, cantidad, subTotal,componenteId} = req.body; 
     
+  
 
     try{
         const compra = await compraRepo.findOne({id: compraId});
-        const lineaCompra = await lineaCompraRepo.findOne({nroLinea: nroLinea, compraId:compraId});
+        const lineaCompra = await lineaCompraRepo.findOne({id:id});
         const componente = await componenteRepo.findOne({id:componenteId});
        
         if (compra && lineaCompra && componente) {
@@ -32,9 +32,7 @@ const lineaCompraUpdateController = async (req: Request, res: Response): Promise
                     data: lineaCompra_updated,
                     message: "The lineaCompra was updated"
                 });
-           
-                      
-
+                await compraRepo.calculateTotal(compra);
 
         } else {
             res.status(404).json({
@@ -42,7 +40,7 @@ const lineaCompraUpdateController = async (req: Request, res: Response): Promise
                 message: 'lineaCompra incorrect credentials'
             });
         }
-
+        
     }
     catch (error) {
         console.error(error);
@@ -50,7 +48,8 @@ const lineaCompraUpdateController = async (req: Request, res: Response): Promise
             data: undefined,
             message: 'There was a server error'
         });
-    }     
+    } 
+       
 };
 
 export default lineaCompraUpdateController;

@@ -9,18 +9,15 @@ const categoriaRepo = new CategoriaRepository();
 const componenteRepo = new ComponenteRepository();
 
 const categoriaInsertController = async (req: Request, res: Response): Promise<void> => {       
-    const {categoriaId, descripcion, componenteId} = req.body; 
+    const {descripcion} = req.body; 
 
     try{
 
-        const categoria = await categoriaRepo.findOne({id: categoriaId});
-        const componente = await componenteRepo.findOne({id:componenteId});
-     if (categoria === undefined 
-            && componente
-        ) {
+        const categoria = await categoriaRepo.findByDescription(descripcion);
+        
+     if (!categoria) {
             
-             const new_categoria = new Categoria(descripcion,componente
-             );
+             const new_categoria = new Categoria(descripcion);
                categoriaRepo.add(new_categoria);
                res.status(201).json({
                     data: new_categoria,

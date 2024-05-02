@@ -1,9 +1,9 @@
 import { LineaCompraRepository } from '../repository/lineaCompraRepository.js';
 const lineaCompraRepo = new LineaCompraRepository();
 const lineaCompraGetOneController = async (req, res) => {
-    const { nroLinea, compraId } = req.body;
+    const id = parseInt(req.params.id);
     try {
-        const lineaCompra = await lineaCompraRepo.findOne({ nroLinea: nroLinea, compraId: compraId });
+        const lineaCompra = await lineaCompraRepo.findOne({ id: id });
         if (lineaCompra) {
             res.status(200).json({
                 data: lineaCompra,

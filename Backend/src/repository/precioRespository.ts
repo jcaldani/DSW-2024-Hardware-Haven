@@ -11,9 +11,7 @@ export class PrecioRepository  {
             const precios = await em.find(
                 Precio,
                 {}
-                ,{ populate: [
-                //, 'componente'
-            ] }
+                ,{ populate: ['componente'] }
             );
             return precios;
         } catch (error: any) {
@@ -22,15 +20,14 @@ export class PrecioRepository  {
     }
     
 
-    async findOne(item: { fechaDesde: Date, componenteId:number }): Promise<Precio | undefined> {
+    async findOne(item: { id:number }): Promise<Precio | undefined> {
         try {
             
             const precio = await em.findOneOrFail(
                 Precio,
-                { fechaDesde: item.fechaDesde, 
-                //    componente:{id: item.componenteId}
+                { id: item.id
                  }
-                //,{ populate: ['componente'] }
+                 ,{ populate: ['componente'] }
             );
             return precio;
         } catch (error: any) {
@@ -50,11 +47,15 @@ export class PrecioRepository  {
           }
     }
 
-    /*
+    
     async update(item: Precio): Promise<Precio | undefined>{
         try {            
+
+            if(!item.componente.id){return undefined;}
+            if(!item.id){return undefined;}
             
-            const precioToUpdate = await this.findOne({fechaDesde:item.fechaDesde, componenteId:item.componente.id })
+            
+            const precioToUpdate = await this.findOne({id:item.id})
             if(precioToUpdate){
             em.assign(precioToUpdate, item)
             await em.flush()
@@ -68,13 +69,13 @@ export class PrecioRepository  {
             return undefined;
           }
     }
-    */
+    
 
-    async delete(item: { fechaDesde: Date, componenteId:number }): Promise<Precio | undefined> {
+    async delete(item: { id:number }): Promise<Precio | undefined> {
         try {
             
-              
-            const precio = await this.findOne(item);
+            if(!item.id){return undefined;}
+            const precio = await this.findOne({id:item.id});
 
             if (precio) {
                 await em.removeAndFlush(precio);
@@ -92,15 +93,15 @@ export class PrecioRepository  {
    
 
 
- /*
+ 
     async updateValor(item: Precio, newValor:number): Promise<Precio | undefined> {
         try {
             
-            if (!item.fechaDesde || !item.componente.id) {
+            if (!item.fechaDesde || !item.componente.id||!item.id) {
                 console.error('ERROR');
                 return undefined;
             }
-            const precioToUpdate = await this.findOne({ fechaDesde: item.fechaDesde, componenteId: item.componente.id });
+            const precioToUpdate = await this.findOne({ id:item.id });
             if (precioToUpdate) {
             precioToUpdate.valor = newValor;
             await em.persistAndFlush(precioToUpdate);
@@ -115,7 +116,7 @@ export class PrecioRepository  {
             return undefined;
         }
         }
-        */
+        
 
        
 

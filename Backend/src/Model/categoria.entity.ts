@@ -2,6 +2,9 @@ import {
     Entity,
     Property,
     ManyToOne,
+    OneToMany,
+    Collection,
+    Cascade
   } from '@mikro-orm/core'
   import { BaseEntity } from '../shared/db/baseEntity.entity.js'
 
@@ -13,15 +16,15 @@ export class Categoria extends BaseEntity {
     @Property({nullable:false})
     descripcion!: string;
 
-    @ManyToOne(() => Componente,{nullable:false})
-    componente!: Componente;
+    
+    @OneToMany(() => Componente, (componente) => componente.categoria, { cascade: [Cascade.ALL], nullable: true })
+    componentes = new Collection<Componente>(this);
 
 
-    constructor(descripcion:string
-      ,componente:Componente) {
+    constructor(descripcion:string) {
       super(); 
       this.descripcion = descripcion;
-      this.componente = componente;
+      
   }
 
 }

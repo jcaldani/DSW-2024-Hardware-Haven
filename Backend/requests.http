@@ -57,20 +57,66 @@ POST  http://localhost:3000/api/compra/insert
 Content-Type: application/json
 
 {
-    "userId":"", 
+    "userId":"2"
 }
 ###Delete
 DELETE  http://localhost:3000/api/compra/deleteOne/:id
 
 ###Put
-PUT   http://localhost:3000/api/compra/update/:id
+PUT   http://localhost:3000/api/compra/update/2
 Content-Type: application/json
 
 {
-"fechaCompra":, 
-"fechaCancel":, 
-"total":
+"fechaCompra": "2024-04-04",
+"fechaCancel": "2024-04-29",
+"total": "200"
 }
+
+//------------------Componente-------------------------------
+###GetAll 
+GET http://localhost:3000/api/componente/getAll
+
+###GetOne
+GET http://localhost:3000/api/componente/getOne/2
+
+###Post 
+POST  http://localhost:3000/api/componente/insert
+Content-Type: application/json
+
+{
+"name":"Atom seleron 1", 
+"description":"Mouse low",
+"categoriaId":"3"
+}
+###Delete
+DELETE  http://localhost:3000/api/componente/deleteOne/:id
+
+###Put
+PUT   http://localhost:3000/api/componente/update/2
+Content-Type: application/json
+
+{
+"newCompName":"Wegger 4444", 
+"newDescription":"Mouse hiper fast",
+"categoriaId":"2"
+}
+###PATCH
+PATCH   http://localhost:3000/api/componente/updateCompName/2
+Content-Type: application/json
+
+{
+"newCompName":"Hammilton Vega 78"
+}
+###PATCH
+PATCH   http://localhost:3000/api/componente/updateDescription/2
+Content-Type: application/json
+
+{
+"newDescription":"Keyboard with lights", 
+"oldDescription":"Mouse hiper fast"
+}
+
+
 //------------------Categoria-------------------------------
 ###GetAll 
 GET http://localhost:3000/api/categoria/getAll
@@ -83,9 +129,7 @@ POST  http://localhost:3000/api/categoria/insert
 Content-Type: application/json
 
 {
-"categoriaId":"", 
-"descripcion":"", 
-"componenteId":""
+"descripcion":"Periferico"
 }
 ###Delete
 DELETE  http://localhost:3000/api/categoria/deleteOne/:id
@@ -95,35 +139,8 @@ PUT   http://localhost:3000/api/categoria/update/:id
 Content-Type: application/json
 
 {
-"descripcion":"", 
-"componenteId":""
-}
+"descripcion":"Periferico Orvital"
 
-//------------------Componente-------------------------------
-###GetAll 
-GET http://localhost:3000/api/componente/getAll
-
-###GetOne
-GET http://localhost:3000/api/componente/getOne/:id
-
-###Post 
-POST  http://localhost:3000/api/componente/insert
-Content-Type: application/json
-
-{
-"name":"", 
-"description":""
-}
-###Delete
-DELETE  http://localhost:3000/api/componente/deleteOne/:id
-
-###Put
-PUT   http://localhost:3000/api/componente/update/:id
-Content-Type: application/json
-
-{
-"newCompName":"", 
-"newDescription":""
 }
 
 
@@ -139,24 +156,22 @@ POST  http://localhost:3000/api/lineaCompra/insert
 Content-Type: application/json
 
 {
-"nroLinea":"", 
-"compraId":"", 
-"cantidad":"",
-"componenteId":""
+  "compraId": "2",
+  "cantidad": "2",
+  "componenteId": "4"
 }
 ###Delete
 DELETE  http://localhost:3000/api/lineaCompra/deleteOne/:id
 
 ###Put
-PUT   http://localhost:3000/api/lineaCompra/update/:id
+PUT   http://localhost:3000/api/lineaCompra/update/1
 Content-Type: application/json
 
 {
-"nroLinea":"", 
-"compraId":"", 
-"cantidad":"", 
-"subTotal":"",
-"componenteId":""
+"compraId":"2", 
+"cantidad":"0", 
+"subTotal":"0",
+"componenteId":"4"
 }
 
 //------------------Precio-------------------------------
