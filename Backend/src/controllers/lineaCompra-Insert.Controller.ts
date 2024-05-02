@@ -72,7 +72,7 @@ const lineaCompraInsertController = async (req: Request, res: Response): Promise
                     
 
         }
-        await compraRepo.calculateTotal(compra);
+        await compraRepo.calculateTotal(compra); //Calcula el total de la compra
         return;
     }
     catch (error) {
