@@ -13,9 +13,18 @@ const precioInsertController = async (req: Request, res: Response): Promise<void
 
     try{
         const componente = await componenteRepo.findOne({id:componenteId});
-        const precio = await componente?.precios.find(x=>x.fechaDesde === fechaDesde);
+        
+        if(!componente){
+            res.status(404).json({
+                data: undefined,
+                message: 'precio incorrect credentials'
+            });
+            return
+        }
 
-        if (!precio && componente) {
+        const precio = await componente.precios.find(x=>x.fechaDesde === fechaDesde);
+
+        if (!precio) {
             const new_precio = new Precio(fechaDesde, valor,componente);
            precioRepo.add(new_precio);
            res.status(201).json({
@@ -27,6 +36,7 @@ const precioInsertController = async (req: Request, res: Response): Promise<void
                 data: undefined,
                 message: 'precio incorrect credentials'
             });
+            return
         }
 
     }

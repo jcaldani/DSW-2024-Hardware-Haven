@@ -21,6 +21,7 @@ const lineaCompraUpdateController = async (req, res) => {
                 data: lineaCompra_updated,
                 message: "The lineaCompra was updated"
             });
+            await compraRepo.calculateTotal(compra);
         }
         else {
             res.status(404).json({

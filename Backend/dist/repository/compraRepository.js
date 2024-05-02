@@ -107,5 +107,17 @@ export class CompraRepository {
             return undefined;
         }
     }
+    async calculateTotal(item) {
+        try {
+            const id = item.id;
+            const compraToUpdate = await em.findOneOrFail(Compra, { id });
+            compraToUpdate.total = compraToUpdate.lineasCompras.reduce((accumulator, currentValue) => accumulator + currentValue.subTotal, 0);
+            await em.persistAndFlush(compraToUpdate);
+            return compraToUpdate;
+        }
+        catch (error) {
+            return undefined;
+        }
+    }
 }
 //# sourceMappingURL=compraRepository.js.map

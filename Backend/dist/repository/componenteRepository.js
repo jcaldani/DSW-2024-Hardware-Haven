@@ -4,7 +4,7 @@ const em = orm.em;
 export class ComponenteRepository {
     async findAll() {
         try {
-            const comps = await em.find(Componente, {});
+            const comps = await em.find(Componente, {}, { populate: ['precios', 'categoria'] });
             return comps;
         }
         catch (error) {
@@ -13,7 +13,7 @@ export class ComponenteRepository {
     }
     async findOne(item) {
         try {
-            const comp = await em.findOneOrFail(Componente, { id: item.id });
+            const comp = await em.findOneOrFail(Componente, { id: item.id }, { populate: ['precios', 'categoria'] });
             return comp;
         }
         catch (error) {

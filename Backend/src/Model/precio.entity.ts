@@ -22,12 +22,8 @@ export class Precio extends BaseEntity {
     @Property({ type: 'decimal', precision: 9, scale: 3 })
     valor!: number;
 
-    @ManyToOne(() => Componente,{primary:true, nullable:false})
-    componente!: Rel<Componente>;;
-
-    
-
-    
+    @ManyToOne(() => Componente,{nullable:false})
+    componente!: Rel<Componente>;    
 
     constructor(fechaDesde:Date, valor:number,componente:Rel<Componente>) {
       super();

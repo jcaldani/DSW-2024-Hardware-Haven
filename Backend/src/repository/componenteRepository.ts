@@ -11,6 +11,7 @@ export class ComponenteRepository  {
             const comps = await em.find(
                 Componente,
                 {}
+                ,{ populate: ['precios', 'categoria'] }
             
             );
             return comps;
@@ -25,7 +26,8 @@ export class ComponenteRepository  {
             
             const comp = await em.findOneOrFail(
                 Componente,
-                { id: item.id }
+                { id: item.id },
+                { populate: ['precios', 'categoria'] }
             );
             return comp;
         } catch (error: any) {
