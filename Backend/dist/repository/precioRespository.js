@@ -13,8 +13,7 @@ export class PrecioRepository {
     }
     async findOne(item) {
         try {
-            const precio = await em.findOneOrFail(Precio, { fechaDesde: item.fechaDesde,
-                componente: { id: item.componenteId }
+            const precio = await em.findOneOrFail(Precio, { id: item.id
             }, { populate: ['componente'] });
             return precio;
         }
@@ -37,7 +36,10 @@ export class PrecioRepository {
             if (!item.componente.id) {
                 return undefined;
             }
-            const precioToUpdate = await this.findOne({ fechaDesde: item.fechaDesde, componenteId: item.componente.id });
+            if (!item.id) {
+                return undefined;
+            }
+            const precioToUpdate = await this.findOne({ id: item.id });
             if (precioToUpdate) {
                 em.assign(precioToUpdate, item);
                 await em.flush();
@@ -54,7 +56,10 @@ export class PrecioRepository {
     }
     async delete(item) {
         try {
-            const precio = await this.findOne(item);
+            if (!item.id) {
+                return undefined;
+            }
+            const precio = await this.findOne({ id: item.id });
             if (precio) {
                 await em.removeAndFlush(precio);
                 return precio;
@@ -70,11 +75,11 @@ export class PrecioRepository {
     }
     async updateValor(item, newValor) {
         try {
-            if (!item.fechaDesde || !item.componente.id) {
+            if (!item.fechaDesde || !item.componente.id || !item.id) {
                 console.error('ERROR');
                 return undefined;
             }
-            const precioToUpdate = await this.findOne({ fechaDesde: item.fechaDesde, componenteId: item.componente.id });
+            const precioToUpdate = await this.findOne({ id: item.id });
             if (precioToUpdate) {
                 precioToUpdate.valor = newValor;
                 await em.persistAndFlush(precioToUpdate);

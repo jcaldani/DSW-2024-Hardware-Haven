@@ -3,10 +3,11 @@ import { ComponenteRepository } from '../repository/componenteRepository.js';
 const precioRepo = new PrecioRepository();
 const componenteRepo = new ComponenteRepository();
 const precioUpdateController = async (req, res) => {
+    const id = parseInt(req.params.id);
     const { fechaDesde, componenteId, valor } = req.body;
     try {
         const componente = await componenteRepo.findOne({ id: componenteId });
-        const precio = await precioRepo.findOne({ fechaDesde: fechaDesde, componenteId: componenteId });
+        const precio = await precioRepo.findOne({ id: id });
         if (precio) {
             precio.valor = valor;
             const precio_updated = await precioRepo.update(precio);

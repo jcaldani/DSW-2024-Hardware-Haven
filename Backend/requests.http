@@ -84,8 +84,8 @@ POST  http://localhost:3000/api/componente/insert
 Content-Type: application/json
 
 {
-"name":"Logitech 1132", 
-"description":"Mouse hiper fast",
+"name":"Atom seleron 1", 
+"description":"Mouse low",
 "categoriaId":"3"
 }
 ###Delete
@@ -157,22 +157,21 @@ Content-Type: application/json
 
 {
   "compraId": "2",
-  "cantidad": "200",
-  "componenteId": "3"
+  "cantidad": "2",
+  "componenteId": "4"
 }
 ###Delete
 DELETE  http://localhost:3000/api/lineaCompra/deleteOne/:id
 
 ###Put
-PUT   http://localhost:3000/api/lineaCompra/update/:id
+PUT   http://localhost:3000/api/lineaCompra/update/1
 Content-Type: application/json
 
 {
-"lineaId":"", 
-"compraId":"", 
-"cantidad":"", 
-"subTotal":"",
-"componenteId":""
+"compraId":"2", 
+"cantidad":"0", 
+"subTotal":"0",
+"componenteId":"4"
 }
 
 //------------------Precio-------------------------------
