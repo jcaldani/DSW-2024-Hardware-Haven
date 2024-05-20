@@ -18,7 +18,7 @@ Información necesaria para comprender y utilizar el proyecto
 [Documentación](https://github.com/jcaldani/DSW-2024-Hardware-Haven/blob/main/Documentation/Hardware%20Haven.pdf) 
 
 ### Modelo
-Herramienta para comprender y facilita la representación de entidades de la base de datos.​(Entidad-Relación)
+Herramienta para comprender y facilitar la representación de entidades de la base de datos.​(Entidad-Relación)
 [Modelo](https://drive.google.com/file/d/1lfZbuE-fTsi7OdIdjwb3Q5HKmJMzFImU/view?usp=sharing) 
 
 
