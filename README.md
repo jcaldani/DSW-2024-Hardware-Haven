@@ -13,6 +13,9 @@ ISI COM 304
 ### Descripción
 Plataforma en línea con una amplia gama de componentes de hardware para armar tu propia PC personalizada. Desde procesadores y tarjetas gráficas hasta almacenamiento y periféricos, todo lo que necesitas para construir la PC perfecta según tus preferencias. Con precios actualizados y una interfaz fácil de usar.
 
+### Documentación
+[Documentación](https://github.com/jcaldani/DSW-2024-Hardware-Haven/blob/main/Documentation/Harware%20Haven.pdf) 
+
 ### Modelo
 [Modelo](https://drive.google.com/file/d/1lfZbuE-fTsi7OdIdjwb3Q5HKmJMzFImU/view?usp=sharing) 
 
@@ -32,4 +35,3 @@ Plataforma en línea con una amplia gama de componentes de hardware para armar t
 |Listados |1. Listado de compras filtrado por fecha, cliente <br>2. Listado de compras por cliente<br>3. Listado de totales|
 |CUU/Epic|1. Descuentos<br>2. Cancelación de la compra|
 |Otros|1. Envío de ofertas o nuevos productos por email al cliente|
-
