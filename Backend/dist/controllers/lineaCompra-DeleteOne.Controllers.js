@@ -1,5 +1,7 @@
 import { LineaCompraRepository } from '../repository/lineaCompraRepository.js';
+import { CompraRepository } from '../repository/compraRepository.js';
 const lineaCompraRepo = new LineaCompraRepository();
+const compraRepo = new CompraRepository();
 const lineaCompraDeleteOneController = async (req, res) => {
     const id = parseInt(req.params.id);
     try {
@@ -17,12 +19,16 @@ const lineaCompraDeleteOneController = async (req, res) => {
                 data: lineaCompra_deleted,
                 message: "The lineaCompra was deleted"
             });
+            const compra = lineaCompra.compra;
+            await compraRepo.calculateTotal(compra);
+            return;
         }
         else {
             res.status(404).json({
                 data: undefined,
                 message: 'lineaCompra incorrect credentials'
             });
+            return;
         }
     }
     catch (error) {

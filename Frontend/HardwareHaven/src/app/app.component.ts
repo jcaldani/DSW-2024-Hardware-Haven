@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component.js';
 
@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component.js';
   template: '<home></home>',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent{
+
   title = 'HardwareHaven';
+
 }

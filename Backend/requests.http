@@ -188,19 +188,19 @@ Content-Type: application/json
 
 {
   "compraId": "2",
-  "cantidad": "2",
+  "cantidad": "20",
   "componenteId": "6"
 }
 ###Delete
 DELETE  http://localhost:3000/api/lineaCompra/deleteOne/:id
 
 ###Put
-PUT   http://localhost:3000/api/lineaCompra/update/1
+PUT   http://localhost:3000/api/lineaCompra/update/:id
 Content-Type: application/json
 
 {
 "compraId":"2", 
 "cantidad":"20", 
-"subTotal":"20",
-"componenteId":"4"
+"subTotal":"200",
+"componenteId":"6"
 }
