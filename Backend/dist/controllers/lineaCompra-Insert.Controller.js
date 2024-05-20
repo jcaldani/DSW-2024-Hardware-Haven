@@ -54,7 +54,7 @@ const lineaCompraInsertController = async (req, res) => {
                 message: "The lineaCompra already exists and it was updated"
             });
         }
-        await compraRepo.calculateTotal(compra); //Calcula el total de la compra
+        await compraRepo.calculateTotal(compra);
         return;
     }
     catch (error) {
