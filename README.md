@@ -21,6 +21,8 @@ Información necesaria para comprender y utilizar el proyecto
 Herramienta para comprender y facilitar la representación de entidades de la base de datos.​(Entidad-Relación)
 [Modelo](https://drive.google.com/file/d/1lfZbuE-fTsi7OdIdjwb3Q5HKmJMzFImU/view?usp=sharing) 
 
+### Videos y tutoriales
+[Tutorial presentación de la API De HardwareHaven](https://youtu.be/nn3WUDYC7xk)
 
 ### Alcance Funcional
 |Req|Detalle|
